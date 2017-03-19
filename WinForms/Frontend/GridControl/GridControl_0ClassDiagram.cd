@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Class Name="DuctingGrids.Frontend.GridControl.GridControl_Row">
+    <Position X="0.5" Y="5.75" Width="2.25" />
+    <InheritanceLine Type="System.Windows.Forms.Panel" FixedToPoint="true">
+      <Path>
+        <Point X="1.5" Y="4.941" />
+        <Point X="1.5" Y="5.375" />
+        <Point X="2" Y="5.375" />
+        <Point X="2" Y="5.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAQAAA=</HashCode>
+      <FileName>Frontend\GridControl\GridControl_Row.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DuctingGrids.Frontend.GridControl.GridControl_BlockMicro">
+    <Position X="3" Y="5.75" Width="2.25" />
+    <InheritanceLine Type="System.Windows.Forms.Button" FixedToPoint="true">
+      <Path>
+        <Point X="3.75" Y="4.941" />
+        <Point X="3.75" Y="5.375" />
+        <Point X="4.25" Y="5.375" />
+        <Point X="4.25" Y="5.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAQAAA=</HashCode>
+      <FileName>Frontend\GridControl\GridControl_BlockMicro.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DuctingGrids.Frontend.GridControl.GridControl_Block">
+    <Position X="5.5" Y="5.75" Width="2.25" />
+    <InheritanceLine Type="System.Windows.Forms.GroupBox" FixedToPoint="true">
+      <Path>
+        <Point X="6.25" Y="4.941" />
+        <Point X="6.25" Y="5.375" />
+        <Point X="6.75" Y="5.375" />
+        <Point X="6.75" Y="5.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAQAAA=</HashCode>
+      <FileName>Frontend\GridControl\GridControl_Block.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DuctingGrids.Frontend.GridControl.GridControls_Create">
+    <Position X="8" Y="2.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CRBAAAAAAAAAAQAAAAAAAAAAAAABIAAAQAAAAAEQAAA=</HashCode>
+      <FileName>Frontend\GridControl\GridControls_Create.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.Forms.Panel" Collapsed="true">
+    <Position X="0.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Forms.Button" Collapsed="true">
+    <Position X="3" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Forms.GroupBox" Collapsed="true">
+    <Position X="5.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="LamedalCore.zPublicClass.GridBlock.GridBlock_5Setup">
+    <Position X="8" Y="4.75" Width="3.25" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridControl">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <AssociationLine Name="_Parent" Type="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridControl" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="1.267" />
+        <Point X="2.74" Y="1.267" />
+        <Point X="2.74" Y="0.26" />
+        <Point X="1.889" Y="0.26" />
+        <Point X="1.889" Y="0.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="_Parent" />
+      <Property Name="GridState" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridBlock_Base">
+    <Position X="4.25" Y="0.5" Width="2.75" />
+    <AssociationLine Name="_Parent" Type="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridBlock_Base" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="1.188" />
+        <Point X="7.24" Y="1.188" />
+        <Point X="7.24" Y="0.26" />
+        <Point X="6.188" Y="0.26" />
+        <Point X="6.188" Y="0.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="_Parent" />
+    </ShowAsAssociation>
+  </Interface>
+  <Enum Name="LamedalCore.domain.Enumerals.enGrid_BlockDisplayType">
+    <Position X="7.75" Y="0.5" Width="2" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="LamedalCore.domain.Enumerals.enGrid_BlockEditMode">
+    <Position X="11.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="LamedalCore.domain.Enumerals.enGrid_BlockEditState">
+    <Position X="13.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="LamedalCore.domain.Enumerals.enGrid_BlockType">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="LamedalCore.domain.Enumerals.enGrid_ChangeType">
+    <Position X="11.75" Y="2" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="LamedalCore.domain.Enumerals.enGrid_ControlType">
+    <Position X="13.75" Y="2" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Delegate Name="LamedalCore.domain.Events.onGrid_ChangeEvent" Collapsed="true">
+    <Position X="11.75" Y="3.75" Width="1.75" />
+    <TypeIdentifier />
+  </Delegate>
+  <Delegate Name="LamedalCore.domain.Events.onGrid_Click" Collapsed="true">
+    <Position X="14" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Delegate>
+  <Delegate Name="LamedalCore.domain.Events.onGrid_CreateControl" Collapsed="true">
+    <Position X="11.75" Y="4.5" Width="1.75" />
+    <TypeIdentifier />
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
