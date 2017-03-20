@@ -17,30 +17,26 @@ namespace DuctingGrids.Frontend.GridControl
 
         public readonly GridBlock_5Setup Cuboid;
         private readonly onGrid_Click _onClickEvent;
+        private GridControl_Settings _Settings;
 
 
         /// <summary>Creates the Grid control with macro, sub and micro grids.</summary>
         /// <param name="rootRow">The root row. This is the top most row</param>
+        /// <param name="settings">The settings.</param>
         /// <param name="onClick">The on click.</param>
         /// <returns></returns>
-        public GridControls_Create(GridControl_Row rootRow, onGrid_Click onClick)        // Starting row                                        
+        public GridControls_Create(GridControl_Row rootRow, GridControl_Settings settings, onGrid_Click onClick)        // Starting row                                        
         {
+            _Settings = settings;
             if (onClick != null)
             {
                 _onClickEvent -= onClick;
                 _onClickEvent += onClick;
             }
-            GridControl_Settings.Size_Refresh();
-            int macroCols = GridControl_Settings.Total_MacroCols;
-            int macroRows = GridControl_Settings.Total_MacroRows;
-            int subCols = GridControl_Settings.Total_SubCols;
-            int subRows = GridControl_Settings.Total_SubRows;     // Sub grids
-            int microCols = GridControl_Settings.Total_MicroCols;
-            int microRows = GridControl_Settings.Total_MicroRows; // Micro grids
 
             // Setup cuboid row
             Layout_Reset(rootRow);
-            Cuboid = new GridBlock_5Setup(onCreateGridControl, macroRows, macroCols, subRows, subCols, microRows, microCols);
+            Cuboid = new GridBlock_5Setup(onCreateGridControl, settings);
             Layout_Resume(rootRow);
         }
 
@@ -86,10 +82,10 @@ namespace DuctingGrids.Frontend.GridControl
                 #region Row setup
                 // ==================
                 int height = 100;
-                if (blocktype == enGrid_BlockType.CuboidGrid) height = GridControl_Settings.Size_CuboidHeight;  // These settings need to be calculated 
-                else if (blocktype == enGrid_BlockType.MacroBlock) height = GridControl_Settings.Size_MacroHeight;  // These settings need to be calculated 
-                else if (blocktype == enGrid_BlockType.SubBlock) height = GridControl_Settings.Size_SubHeight;
-                else if (blocktype == enGrid_BlockType.MicroBlock) height = GridControl_Settings.Size_MicroHeight;
+                if (blocktype == enGrid_BlockType.CuboidGrid) height = _Settings.Size_CuboidHeight;  // These settings need to be calculated 
+                else if (blocktype == enGrid_BlockType.MacroBlock) height = _Settings.Size_MacroHeight;  // These settings need to be calculated 
+                else if (blocktype == enGrid_BlockType.SubBlock) height = _Settings.Size_SubHeight;
+                else if (blocktype == enGrid_BlockType.MicroBlock) height = _Settings.Size_MicroHeight;
 
                 GridControl_SetupRow(parent, gridcontrol, height);
                 #endregion
@@ -102,27 +98,27 @@ namespace DuctingGrids.Frontend.GridControl
                 int width = 30;
                 if (blocktype == enGrid_BlockType.CuboidGrid)
                 {
-                    color = GridControl_Settings.ColorDefault_CuboidGrid;
-                    width = GridControl_Settings.Size_CuboidWidth; // These settings need to be calculated 
+                    color = _Settings.ColorDefault_CuboidGrid;
+                    width = _Settings.Size_CuboidWidth; // These settings need to be calculated 
                 } else if (blocktype == enGrid_BlockType.MacroBlock)
                 {
-                    width = GridControl_Settings.Size_MacroWidth; // These settings need to be calculated 
-                    color = GridControl_Settings.ColorDefault_MacroGrid;
+                    width = _Settings.Size_MacroWidth; // These settings need to be calculated 
+                    color = _Settings.ColorDefault_MacroGrid;
                 }
                 else if (blocktype == enGrid_BlockType.SubBlock)
                 {
-                    width = GridControl_Settings.Size_SubWidth;
-                    color = GridControl_Settings.ColorDefault_SubGrid;
+                    width = _Settings.Size_SubWidth;
+                    color = _Settings.ColorDefault_SubGrid;
                 }
                 else if (blocktype == enGrid_BlockType.MicroBlock)
                 {
-                    var display = GridControl_Settings.DisplayMode_MicroGrids;
+                    var display = _Settings.DisplayMode_MicroGrids;
                     if (display == enGrid_BlockDisplayType.Address) gridcontrol.Text = sender.Name_Caption;   // Set the caption of the control
                     if (display == enGrid_BlockDisplayType.Name) gridcontrol.Text = sender.Name_Control;   // Set the caption of the control
                     if (display == enGrid_BlockDisplayType.Value) gridcontrol.Text = "?";   //There is no value yet
 
-                    width = GridControl_Settings.Size_MicroWidth;
-                    color = GridControl_Settings.ColorDefault_MicroGrid;
+                    width = _Settings.Size_MicroWidth;
+                    color = _Settings.ColorDefault_MicroGrid;
                 }
                 GridControl_SetupBlock(parent, gridcontrol, width, color);
 
@@ -144,7 +140,7 @@ namespace DuctingGrids.Frontend.GridControl
             }
             // Setup the root row
             _gridControls.Add(rootRow.Name, rootRow);
-            rootRow.Height = GridControl_Settings.Size_CuboidHeight;
+            rootRow.Height = _Settings.Size_CuboidHeight;
         }
 
         /// <summary>Resume layout on all controls.</summary>

@@ -19,10 +19,12 @@ namespace DuctingGrids.Frontend.Forms
         private readonly LamedalCore_ _lamed = LamedalCore_.Instance;
         private GridControls_Create _grids = null;
         private bool _loading = true;
+        private GridControl_Settings _Settings;
 
         public Form2()
         {
             InitializeComponent();
+            _Settings = _lamed.lib.MultiGrids.GridControl_Settings();
             _loading = false;
         }
 
@@ -35,7 +37,7 @@ namespace DuctingGrids.Frontend.Forms
         {
             Frontend_Settings();
 
-            _grids = new GridControls_Create(R1, onGridClick);
+            _grids = new GridControls_Create(R1, _Settings, onGridClick);
         }
 
         private void Frontend_Settings()
@@ -43,35 +45,37 @@ namespace DuctingGrids.Frontend.Forms
             // Get frontend values
             // =====================================
             // Sizes
-            GridControl_Settings.Size_MicroHeight = textHeight.Text.zTo_Int();
-            GridControl_Settings.Size_MicroWidth = textWidth.Text.zTo_Int();
+            _Settings.Size_MicroHeight = textHeight.Text.zTo_Int();
+            _Settings.Size_MicroWidth = textWidth.Text.zTo_Int();
 
             // Macro scope
-            GridControl_Settings.Total_MacroCols = textMacroCols.Text.zTo_Int();
-            GridControl_Settings.Total_MacroRows = textMacroRows.Text.zTo_Int();
+            _Settings.Total_MacroCols = textMacroCols.Text.zTo_Int();
+            _Settings.Total_MacroRows = textMacroRows.Text.zTo_Int();
 
             // Sub-Grids scope
-            GridControl_Settings.Total_SubCols = textSubCols.Text.zTo_Int();
-            GridControl_Settings.Total_SubRows = textSubRows.Text.zTo_Int();
+            _Settings.Total_SubCols = textSubCols.Text.zTo_Int();
+            _Settings.Total_SubRows = textSubRows.Text.zTo_Int();
 
             // Micro scope
-            GridControl_Settings.Total_MicroCols = textMicroCols.Text.zTo_Int();
-            GridControl_Settings.Total_MicroRows = textMicroRows.Text.zTo_Int();
+            _Settings.Total_MicroCols = textMicroCols.Text.zTo_Int();
+            _Settings.Total_MicroRows = textMicroRows.Text.zTo_Int();
 
             // Visible
-            GridControl_Settings.Visible_MacroGrids = checkMacro.Checked;
-            GridControl_Settings.Visible_SubGrids = checkSub.Checked;
-            GridControl_Settings.Visible_MicroGrids = checkMicro.Checked;
+            _Settings.Visible_MacroGrids = checkMacro.Checked;
+            _Settings.Visible_SubGrids = checkSub.Checked;
+            _Settings.Visible_MicroGrids = checkMicro.Checked;
 
             // Color
-            GridControl_Settings.ColorDefault_MacroGrid = labelColorMacro.BackColor;
-            GridControl_Settings.ColorDefault_SubGrid = labelColorSub.BackColor;
-            GridControl_Settings.ColorDefault_MicroGrid = labelColorMicro.BackColor;
+            _Settings.ColorDefault_MacroGrid = labelColorMacro.BackColor;
+            _Settings.ColorDefault_SubGrid = labelColorSub.BackColor;
+            _Settings.ColorDefault_MicroGrid = labelColorMicro.BackColor;
 
             // Display type
-            if (radioAddress.Checked) GridControl_Settings.DisplayMode_MicroGrids = enGrid_BlockDisplayType.Address;
-            if (radioValue.Checked) GridControl_Settings.DisplayMode_MicroGrids = enGrid_BlockDisplayType.Value;
-            if (radioName.Checked) GridControl_Settings.DisplayMode_MicroGrids = enGrid_BlockDisplayType.Name;
+            if (radioAddress.Checked) _Settings.DisplayMode_MicroGrids = enGrid_BlockDisplayType.Address;
+            if (radioValue.Checked) _Settings.DisplayMode_MicroGrids = enGrid_BlockDisplayType.Value;
+            if (radioName.Checked) _Settings.DisplayMode_MicroGrids = enGrid_BlockDisplayType.Name;
+
+            _Settings.Refresh_Calculations();
         }
 
         private void onGridClick(IGridControl sender)
@@ -146,10 +150,10 @@ namespace DuctingGrids.Frontend.Forms
             #endregion
 
             // Define colors
-            GridControl_Settings.Color_ID.Clear();
-            GridControl_Settings.Color_ID.Add(1, Color.Green);
-            GridControl_Settings.Color_ID.Add(2, Color.Yellow);
-            GridControl_Settings.Color_ID.Add(3, Color.Red);
+            _Settings.Color_ID.Clear();
+            _Settings.Color_ID.Add(1, Color.Green);
+            _Settings.Color_ID.Add(2, Color.Yellow);
+            _Settings.Color_ID.Add(3, Color.Red);
 
             RefreshGrid();
         }
@@ -158,7 +162,7 @@ namespace DuctingGrids.Frontend.Forms
         {
             Frontend_Settings();
             if (_grids == null) GenerateGrids();
-            GridControl_Settings.Update(_grids.Cuboid, true, onGridChange);
+            _lamed.lib.MultiGrids.Syncronise(_grids.Cuboid, _Settings, true, onGridChange);
         }
 
         private void onGridChange(IGridControl gridcontrol, enGrid_ChangeType changetype)
