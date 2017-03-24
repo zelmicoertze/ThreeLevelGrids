@@ -72,7 +72,6 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.buttonRefresh = new System.Windows.Forms.Button();
-            this.R1 = new DuctingGrids.Frontend.GridControl.GridControl_Row();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -526,7 +525,7 @@ namespace DuctingGrids.Frontend.Forms
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.R1);
+            
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(0, 85);
             this.groupBox6.Name = "groupBox6";
@@ -543,16 +542,6 @@ namespace DuctingGrids.Frontend.Forms
             this.buttonRefresh.Text = "Refresh";
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
-            // R1
-            // 
-            this.R1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.R1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.R1.GridState = null;
-            this.R1.Location = new System.Drawing.Point(3, 16);
-            this.R1.Name = "R1";
-            this.R1.Size = new System.Drawing.Size(1142, 468);
-            this.R1.TabIndex = 0;
             // 
             // Form2
             // 
@@ -609,7 +598,7 @@ namespace DuctingGrids.Frontend.Forms
         private System.Windows.Forms.CheckBox checkMacro;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox6;
-        private GridControl_Row R1;
+        
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.RadioButton radioName;
         private System.Windows.Forms.RadioButton radioValue;
