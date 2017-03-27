@@ -24,8 +24,25 @@ namespace DuctingGrids.Frontend.Forms
         public Form2()
         {
             InitializeComponent();
-            _Settings = _lamed.lib.MultiGrids.GridControl_Settings();
+            _Settings = GridControlTools.GridControl_Settings();
             _loading = false;
+            Row1();
+        }
+        private GridControl_Row R1;
+        private void Row1()
+        {
+            this.R1 = new DuctingGrids.Frontend.GridControl.GridControl_Row();
+            // 
+            // R1
+            // 
+            this.R1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.R1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.R1.GridState = null;
+            this.R1.Location = new System.Drawing.Point(3, 16);
+            this.R1.Name = "R1";
+            this.R1.Size = new System.Drawing.Size(1142, 468);
+            this.R1.TabIndex = 0;
+            this.groupBox6.Controls.Add(this.R1);
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)
@@ -162,7 +179,7 @@ namespace DuctingGrids.Frontend.Forms
         {
             Frontend_Settings();
             if (_grids == null) GenerateGrids();
-            _lamed.lib.MultiGrids.Syncronise(_grids.Cuboid, _Settings, true, onGridChange);
+            GridControlTools.Syncronise(_grids.Cuboid, _Settings, true, onGridChange);
         }
 
         private void onGridChange(IGridControl gridcontrol, enGrid_ChangeType changetype)
