@@ -1,4 +1,9 @@
-﻿using DuctingGrids.Frontend.GridControl;
+﻿using System;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
+using DuctingGrids.Frontend.GridControl;
 
 namespace DuctingGrids.Frontend.Forms
 {
@@ -7,7 +12,7 @@ namespace DuctingGrids.Frontend.Forms
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,6 +35,7 @@ namespace DuctingGrids.Frontend.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.textMacroRows = new System.Windows.Forms.TextBox();
@@ -51,6 +57,7 @@ namespace DuctingGrids.Frontend.Forms
             this.checkSub = new System.Windows.Forms.CheckBox();
             this.checkMacro = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ductingControl1 = new DuctingGrids.Frontend.GridControl.DuctingControl(this.components);
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.radioSelect = new System.Windows.Forms.RadioButton();
             this.radioClick = new System.Windows.Forms.RadioButton();
@@ -266,7 +273,6 @@ namespace DuctingGrids.Frontend.Forms
             this.checkMicro.TabIndex = 2;
             this.checkMicro.Text = "Micro Grids";
             this.checkMicro.UseVisualStyleBackColor = true;
-            this.checkMicro.CheckStateChanged += new System.EventHandler(this.checkMicro_CheckStateChanged);
             this.checkMicro.Click += new System.EventHandler(this.radioName_Click);
             // 
             // checkSub
@@ -299,6 +305,7 @@ namespace DuctingGrids.Frontend.Forms
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.ductingControl1);
             this.groupBox4.Controls.Add(this.groupBox7);
             this.groupBox4.Controls.Add(this.buttonRefresh);
             this.groupBox4.Controls.Add(this.groupBox10);
@@ -317,6 +324,41 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Toolbar";
+            // 
+            // ductingControl1
+            // 
+            this.ductingControl1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.ductingControl1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.ductingControl1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.ductingControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            //this.ductingControl1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.ductingControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ductingControl1.blockDisplayType = LamedalCore.domain.Enumerals.enGrid_BlockDisplayType.Address;
+            //this.ductingControl1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ductingControl1.CausesValidation = false;
+            this.ductingControl1.displayAddress = true;
+            this.ductingControl1.displayName = false;
+            this.ductingControl1.displayValue = false;
+            this.ductingControl1.gridHeight = 25;
+            this.ductingControl1.gridWidth = 32;
+            this.ductingControl1.Location = new System.Drawing.Point(629, 22);
+            this.ductingControl1.macroCols = 2;
+            this.ductingControl1.macroGridDefaultColor = System.Drawing.Color.LightGray;
+            this.ductingControl1.macroRows = 2;
+            this.ductingControl1.microCols = 2;
+            this.ductingControl1.microGridDefaultColor = System.Drawing.Color.LightGray;
+            this.ductingControl1.microRows = 2;
+            this.ductingControl1.Name = "ductingControl1";
+            this.ductingControl1.RefreshGrid = false;
+            this.ductingControl1.Size = new System.Drawing.Size(98, 50);
+            this.ductingControl1.subCols = 2;
+            this.ductingControl1.subGridDefaultColor = System.Drawing.Color.LightGray;
+            this.ductingControl1.subRows = 2;
+            this.ductingControl1.TabIndex = 0;
+            this.ductingControl1.Text = "ductingControl1";
+            this.ductingControl1.visibleMacro = true;
+            this.ductingControl1.visibleMicro = true;
+            this.ductingControl1.visibleSub = true;
             // 
             // groupBox7
             // 
@@ -557,8 +599,6 @@ namespace DuctingGrids.Frontend.Forms
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1148, 779);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox4);
@@ -588,48 +628,49 @@ namespace DuctingGrids.Frontend.Forms
 
         #endregion
 
-        private System.Windows.Forms.Button buttonGenerate;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox textMacroRows;
-        private System.Windows.Forms.TextBox textMacroCols;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textSubRows;
-        private System.Windows.Forms.TextBox textSubCols;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textMicroRows;
-        private System.Windows.Forms.TextBox textMicroCols;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox checkMicro;
-        private System.Windows.Forms.CheckBox checkSub;
-        private System.Windows.Forms.CheckBox checkMacro;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox6;
+        private Button buttonGenerate;
+        private GroupBox groupBox5;
+        private TextBox textMacroRows;
+        private TextBox textMacroCols;
+        private Label label5;
+        private Label label6;
+        private GroupBox groupBox2;
+        private TextBox textSubRows;
+        private TextBox textSubCols;
+        private Label label3;
+        private Label label4;
+        private GroupBox groupBox1;
+        private TextBox textMicroRows;
+        private TextBox textMicroCols;
+        private Label label2;
+        private Label label1;
+        private GroupBox groupBox3;
+        private CheckBox checkMicro;
+        private CheckBox checkSub;
+        private CheckBox checkMacro;
+        private GroupBox groupBox4;
+        private GroupBox groupBox6;
         private GridControl_Row R1;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.RadioButton radioName;
-        private System.Windows.Forms.RadioButton radioValue;
-        private System.Windows.Forms.RadioButton radioAddress;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.RadioButton radioSelect;
-        private System.Windows.Forms.RadioButton radioClick;
-        private System.Windows.Forms.RadioButton radioReadOnly;
-        private System.Windows.Forms.Button button_LoadData;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.TextBox textHeight;
-        private System.Windows.Forms.TextBox textWidth;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.Label labelColorMicro;
-        private System.Windows.Forms.Label labelColorSub;
-        private System.Windows.Forms.Label labelColorMacro;
-        private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Button buttonRefresh;
+        private GroupBox groupBox8;
+        private RadioButton radioName;
+        private RadioButton radioValue;
+        private RadioButton radioAddress;
+        private GroupBox groupBox7;
+        private RadioButton radioSelect;
+        private RadioButton radioClick;
+        private RadioButton radioReadOnly;
+        private Button button_LoadData;
+        private GroupBox groupBox9;
+        private TextBox textHeight;
+        private TextBox textWidth;
+        private Label label8;
+        private Label label7;
+        private GroupBox groupBox10;
+        private Label labelColorMicro;
+        private Label labelColorSub;
+        private Label labelColorMacro;
+        private ColorDialog colorDialog1;
+        private Button buttonRefresh;
+        private DuctingControl ductingControl1;
     }
 }

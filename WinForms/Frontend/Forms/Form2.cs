@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -22,79 +23,37 @@ namespace DuctingGrids.Frontend.Forms
         private GridControls_Create _grids = null;
         private bool _loading = true;
         private GridControl_Settings _Settings;
+        private DuctingControl _grid;
 
         public Form2()
         {
             InitializeComponent();
-            _Settings = _lamed.lib.MultiGrids.GridControl_Settings();
+            _Settings = GridControlTools.GridControl_Settings();
             _loading = false;
 
-            int iMacroXCount = 0;
-            int iMacroYCount = 0;
-            int iSubXCount = 0;
-            int iSubYCount = 0;
-            int iMicroXCount = 0;
-            int iMicroYCount = 0;
+            var gridDataSet = new DataSet();
 
-            using (StreamReader sr = new StreamReader(@"C:\Users\zcoertze\Desktop\Grid_Test.txt"))
-            {
-                while (sr.Peek() >= 0)
-                {
-                    string sLine;
-                    string[] sArrData;
-                    sLine = sr.ReadLine();
+            gridDataSet.ReadXml(@"C:\Users\zcoertze\Desktop\Grid_Test.xml");
 
-                    sArrData = sLine.Split(',');
+            DataTable gridData = gridDataSet.Tables[0];
 
-                    int iMacroX = int.Parse(sArrData[0].Substring(1, sArrData[0].Length - 1));
-                    int iMacroY = int.Parse(sArrData[1].Substring(0, sArrData[1].LastIndexOf('"')));
+            int[] arrCounts = DuctingTools.BlockSizes(gridData);
 
-                    if (iMacroX > iMacroXCount)
-                    {
-                        iMacroXCount = iMacroX;
-                    }
-                    if (iMacroY > iMacroYCount)
-                    {
-                        iMacroYCount = iMacroY;
-                    }
-
-                    int iSubX = int.Parse(sArrData[2].Substring(1, sArrData[2].Length - 1));
-                    int iSubY = int.Parse(sArrData[3].Substring(0, sArrData[3].LastIndexOf('"')));
-
-                    if (iSubX > iSubXCount)
-                    {
-                        iSubXCount = iSubX;
-                    }
-                    if (iSubY > iSubYCount)
-                    {
-                        iSubYCount = iSubY;
-                    }
-
-                    int iMicroX = int.Parse(sArrData[4].Substring(1, sArrData[4].Length - 1));
-                    int iMicroY = int.Parse(sArrData[5].Substring(0, sArrData[5].LastIndexOf('"')));
-
-                    if (iMicroX > iMicroXCount)
-                    {
-                        iMicroXCount = iMicroX;
-                    }
-                    if (iMicroY > iMicroYCount)
-                    {
-                        iMicroYCount = iMicroY;
-                    }
-
-                    textMacroRows.Text = iMacroXCount.ToString();
-                    textMacroCols.Text = iMacroYCount.ToString();
-                    textSubRows.Text = iSubXCount.ToString();
-                    textSubCols.Text = iSubYCount.ToString();
-                    textMicroRows.Text = iMicroXCount.ToString();
-                    textMicroCols.Text = iMicroYCount.ToString();
-                }
-            }
+            textMacroRows.Text = arrCounts[0].ToString();
+            textMacroCols.Text = arrCounts[1].ToString();
+            textSubRows.Text = arrCounts[2].ToString();
+            textSubCols.Text = arrCounts[3].ToString();
+            textMicroRows.Text = arrCounts[4].ToString();
+            textMicroCols.Text = arrCounts[5].ToString();
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
             GenerateGrids();
+            //Frontend_Settings();
+            //_grid = new DuctingControl();
+            //_grid.Parent = R1;
+            //_grid.Dock = DockStyle.Fill;
         }
 
         private void GenerateGrids()
@@ -104,7 +63,46 @@ namespace DuctingGrids.Frontend.Forms
             _grids = new GridControls_Create(R1, _Settings, onGridClick);
         }
 
-        private void Frontend_Settings()
+        public void Load_Data(string fileName)
+        {
+            if (_grids == null) return;
+
+            #region Populate From File
+
+            var gridDataSet = new DataSet();
+
+            gridDataSet.ReadXml(fileName);
+
+            DataTable gridData = gridDataSet.Tables[0];
+
+            DuctingTools.ReadGridDataFromFile(_grids, gridData);
+
+            #endregion
+
+            // Define colors
+            _Settings.Color_ID.Clear();
+            _Settings.Color_ID.Add(1, System.Drawing.Color.Green);
+            _Settings.Color_ID.Add(2, System.Drawing.Color.Orange);
+            _Settings.Color_ID.Add(3, System.Drawing.Color.DodgerBlue);
+            _Settings.Color_ID.Add(4, System.Drawing.Color.Red);
+            _Settings.Color_ID.Add(5, System.Drawing.Color.Yellow);
+
+            RefreshGrid();
+        }
+
+        private void RefreshGrid()
+        {
+            Frontend_Settings();
+            if (_grids == null) GenerateGrids();
+            GridControlTools.Syncronise(_grids.Cuboid, _Settings, true, onGridChange);
+        }
+
+        private void onGridChange(IGridControl gridcontrol, enGrid_ChangeType changetype)
+        {
+            // Fired when something changed.
+        }
+
+        public void Frontend_Settings()
         {
             // Get frontend values
             // =====================================
@@ -128,7 +126,6 @@ namespace DuctingGrids.Frontend.Forms
             _Settings.Visible_MacroGrids = checkMacro.Checked;
             _Settings.Visible_SubGrids = checkSub.Checked;
             _Settings.Visible_MicroGrids = checkMicro.Checked;
-
             // Color
             _Settings.ColorDefault_MacroGrid = labelColorMacro.BackColor;
             _Settings.ColorDefault_SubGrid = labelColorSub.BackColor;
@@ -157,116 +154,7 @@ namespace DuctingGrids.Frontend.Forms
 
         private void button_LoadData_Click(object sender, EventArgs e)
         {
-            if (_grids == null) return;
-
-            //#region Sub1.1
-            //// 1.1
-            //var gridMicro = _grids.Cuboid.GetChild_MicroGridBlock("1_1", "1_1", "1_1");
-            //gridMicro.State_Setup(1.5, 1, Color.Red);
-
-            //// 1.2
-            //var gridSub = _grids.Cuboid.GetChild_SubGridBlock("1_1", "1_1");
-            //gridMicro = gridSub.GetChild_GridBlock("1_2");
-            //gridMicro.State_Setup(1.52, 2, Color.Blue);
-
-            //// 1.3
-            //gridSub.GetChild_GridBlock("1_3").State_Setup(2.52, 3, Color.Green);
-
-            //// 1.4
-            //var state = gridSub.GetChild_GridBlock("1_4") as IGridBlock_State;
-            //if (state != null)
-            //{
-            //    state.State_ValueDouble = 3.3;
-            //    state.State_Color = Color.Aqua;
-            //}
-            //#endregion
-
-            #region Populate from text file
-
-            using (StreamReader sr = new StreamReader(@"C:\Users\zcoertze\Desktop\Grid_Test.txt"))
-            {
-                    while (sr.Peek() >= 0)
-                    {
-                        string sLine;
-                        string[] sArrData;
-                        sLine = sr.ReadLine();
-
-                        sArrData = sLine.Split(',');
-
-                        string sMacroX = sArrData[0];
-                        string sMacroY = sArrData[1];
-                        string sMacro = sMacroX.Substring(1, sMacroX.Length - 1) + "_" + sMacroY.Substring(0, sMacroY.LastIndexOf('"'));
-
-                        string sSubX = sArrData[2];
-                        string sSubY = sArrData[3];
-                        string sSub = sSubX.Substring(1, sSubX.Length - 1) + "_" + sSubY.Substring(0, sSubY.LastIndexOf('"'));
-
-                        string sMicroX = sArrData[4];
-                        string sMicroY = sArrData[5];
-                        string sMicro = sMicroX.Substring(1, sMicroX.Length - 1) + "_" + sMicroY.Substring(0, sMicroY.LastIndexOf('"'));
-
-                        string sFloatValue = sArrData[6];
-                        double dFloatData;
-
-                        if (sFloatValue == "")
-                        {
-                            dFloatData = 0;
-                        }
-                        else
-                        {
-                            dFloatData = double.Parse(sFloatValue);                
-                        }
-
-                        string sState = sArrData[7];
-
-                        switch (sState)
-                        {
-                            case "Scheduled":
-                                sState = "1";
-                                break;
-                            case "In Progress":
-                                sState = "2";
-                                break;
-                            case "Complete":
-                                sState = "3";
-                                break;
-                            case "Cancelled":
-                                sState = "4";
-                                break;
-                            case "Inspected":
-                                sState = "5";
-                                break;
-                        }
-
-                        var gridSub = _grids.Cuboid.GetChild_SubGridBlock(sMacro, sSub);
-
-                        gridSub.GetChild_GridBlock(sMicro).State_Setup(dFloatData, int.Parse(sState));
-                    }
-                }
-            
-            #endregion
-
-            // Define colors
-            _Settings.Color_ID.Clear();
-            _Settings.Color_ID.Add(1, Color.Green);
-            _Settings.Color_ID.Add(2, Color.Orange);
-            _Settings.Color_ID.Add(3, Color.DodgerBlue);
-            _Settings.Color_ID.Add(4, Color.Red);
-            _Settings.Color_ID.Add(5, Color.Yellow);
-
-            RefreshGrid();
-        }
-
-        private void RefreshGrid()
-        {
-            Frontend_Settings();
-            if (_grids == null) GenerateGrids();
-            _lamed.lib.MultiGrids.Syncronise(_grids.Cuboid, _Settings, true, onGridChange);
-        }
-
-        private void onGridChange(IGridControl gridcontrol, enGrid_ChangeType changetype)
-        {
-            // Fired when something changed.
+            Load_Data(@"C:\Users\zcoertze\Desktop\Grid_Test.xml");
         }
 
         private void labelColor_Click(object sender, EventArgs e)
@@ -288,14 +176,6 @@ namespace DuctingGrids.Frontend.Forms
         private void radioName_Click(object sender, EventArgs e)
         {
             RefreshGrid();
-        }
-
-        private void checkMicro_CheckStateChanged(object sender, EventArgs e)
-        {
-            if (checkMicro.Checked == false)
-            {
-                MessageBox.Show("Zoom out.");
-            }
         }
     }
 }
