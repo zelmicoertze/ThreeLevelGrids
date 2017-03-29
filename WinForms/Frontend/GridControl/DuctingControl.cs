@@ -27,9 +27,9 @@ namespace DuctingGrids.Frontend.GridControl
     public partial class DuctingControl : Control
     {
         private GridControl_Row _panelRow;
-        private bool _RefreshGrid;
+        private bool _refreshGrid;
         private GridControl_Settings _Settings = GridControlTools.GridControl_Settings();
-        private GridControls_Create _grids;
+        public GridControls_Create _grids;
 
         public DuctingControl()
         {
@@ -151,15 +151,15 @@ namespace DuctingGrids.Frontend.GridControl
         [Description("Refreshes the grid")]
         public bool RefreshGrid
         {
-            get { return _RefreshGrid; }
+            get { return _refreshGrid; }
             set
             {
-                _RefreshGrid = value;
+                _refreshGrid = value;
                 if (value)
                 {
                     GenerateGrids();
                 }
-                _RefreshGrid = false;
+                _refreshGrid = false;
             }
         }
 
@@ -237,7 +237,7 @@ namespace DuctingGrids.Frontend.GridControl
             GridControlTools.Syncronise(_grids.Cuboid, _Settings, true, onGridChange);
         }
 
-        private void onGridChange(IGridControl gridcontrol, enGrid_ChangeType changetype)
+        public void onGridChange(IGridControl gridcontrol, enGrid_ChangeType changetype)
         {
             // Fired when something changed.
         }
@@ -254,7 +254,6 @@ namespace DuctingGrids.Frontend.GridControl
             }
             MessageBox.Show(caption, "Grid Feedback");
         }
-
 
         #region Hide
         #region Hide Properties Not Used

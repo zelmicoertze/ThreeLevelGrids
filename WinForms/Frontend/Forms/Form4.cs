@@ -110,7 +110,9 @@ namespace DuctingGrids.Frontend.Forms
             _ductingControl.displayAddress = bAddress;
             _ductingControl.displayValue = bValue;
             _ductingControl.Frontend_Settings();
-            _ductingControl.Refresh();
+            //GridControlTools.Syncronise(_ductingControl._grids.Cuboid, _Settings, true, _ductingControl.onGridChange);
+            //_ductingControl.GenerateGrids();
+            //_ductingControl.Refresh();
         }
     }
 }
