@@ -45,7 +45,7 @@ namespace DuctingGrids.Frontend.GridControl
         private void onCreateGridControl(IGridBlock_Base sender, enGrid_ControlType gridcontroltype, string parentname, string childname, 
             enGrid_BlockType blocktype, ref IGridControl gridcontrol)
         {
-            if (gridcontrol != null) throw new ArgumentException(nameof(gridcontrol), "Error!. Grid control must be null in order to be created.");
+            if (gridcontrol != null) throw new ArgumentException(gridcontrol.ToString(), "Error!. Grid control must be null in order to be created.");
             #region Sample of a simple 1x1,1x1,1x1 grid
             // R1
             // R1cub1_1
@@ -73,7 +73,7 @@ namespace DuctingGrids.Frontend.GridControl
 
             // Find the parent
             IGridControl parent;
-            if (GridControl_Get(parentname, out parent) == false) throw new InvalidOperationException($"Error! Parent '{parentname}' does not exist.");
+            if (GridControl_Get(parentname, out parent) == false) throw new InvalidOperationException("Error! Parent " + parentname + " does not exist.");
 
             // Setup the row / grid properties
             gridcontrol.GridState = sender;
@@ -163,14 +163,14 @@ namespace DuctingGrids.Frontend.GridControl
         {
             #region Check input parameters
             // Check row
-            if (rowControl == null) throw new ArgumentNullException(nameof(rowControl));
+            if (rowControl == null) throw new ArgumentNullException(rowControl.ToString());
             var row = rowControl as GridControl_Row;
-            if (row == null) throw new ArgumentNullException(nameof(row));
+            if (row == null) throw new ArgumentNullException(row.ToString());
 
             // Check parent
-            if (parentControl == null) throw new ArgumentNullException(nameof(parentControl));
+            if (parentControl == null) throw new ArgumentNullException(parentControl.ToString());
             var parent = parentControl as GridControl_Block;
-            if (parent == null) throw new ArgumentNullException(nameof(parent));
+            if (parent == null) throw new ArgumentNullException(parent.ToString());
             #endregion
 
             if (row.Parent != parent) parent.Controls.Add(row);
@@ -197,12 +197,12 @@ namespace DuctingGrids.Frontend.GridControl
         {
             #region Check input parameters
             // Check the control
-            if (gridControl == null) throw new ArgumentNullException(nameof(gridControl));
+            if (gridControl == null) throw new ArgumentNullException(gridControl.ToString());
 
             // Check parent
-            if (parentRowControl == null) throw new ArgumentNullException(nameof(parentRowControl));
+            if (parentRowControl == null) throw new ArgumentNullException(parentRowControl.ToString());
             var parent = parentRowControl as GridControl_Row;
-            if (parent == null) throw new ArgumentNullException(nameof(parent));
+            if (parent == null) throw new ArgumentNullException(parent.ToString());
             #endregion
 
             // Set the parent & add events
