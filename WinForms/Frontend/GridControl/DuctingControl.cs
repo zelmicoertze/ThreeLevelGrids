@@ -227,10 +227,10 @@ namespace DuctingGrids.Frontend.GridControl
             _Settings.Color_ID.Add(4, System.Drawing.Color.Red);
             _Settings.Color_ID.Add(5, System.Drawing.Color.Yellow);
 
-            Refresh();
+            RefreshGrids();
         }
 
-        private void Refresh()
+        public void RefreshGrids()
         {
             Frontend_Settings();
             if (_grids == null) GenerateGrids();

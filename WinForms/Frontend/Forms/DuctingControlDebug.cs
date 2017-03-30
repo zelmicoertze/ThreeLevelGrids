@@ -11,11 +11,11 @@ using DuctingGrids.Frontend.GridControl;
 
 namespace DuctingGrids.Frontend.Forms
 {
-    public partial class Form3 : Form
+    public partial class DuctingControlDebug : Form
     {
         private DuctingControl _grid;
 
-        public Form3()
+        public DuctingControlDebug()
         {
             InitializeComponent();
         }
