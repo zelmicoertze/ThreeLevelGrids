@@ -42,9 +42,6 @@ namespace DuctingGrids.Frontend.GridControl
             return result;
         }
 
-
-
-
         /// <summary>
         /// Syncronise the settings with the frontend controls.
         /// </summary>

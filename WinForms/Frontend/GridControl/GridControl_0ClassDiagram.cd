@@ -48,14 +48,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="DuctingGrids.Frontend.GridControl.GridControls_Create">
+  <Class Name="DuctingGrids.Frontend.GridControl.winForms_GridControlsSetup">
     <Position X="8" Y="2.75" Width="2.25" />
     <Compartments>
       <Compartment Name="Private" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>CRBAAAAAAAAAAQAAAAAAAAAAAAABIAAAQAAAAAEQAAA=</HashCode>
-      <FileName>Frontend\GridControl\GridControls_Create.cs</FileName>
+      <HashCode>CRBAAAAAAAAAAQAAAAAAAAAAAAABIAAAwAAAAIEQAAA=</HashCode>
+      <FileName>Frontend\GridControl\winForms_GridControlsSetup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="System.Windows.Forms.Panel" Collapsed="true">
@@ -88,8 +88,8 @@
     </AssociationLine>
     <TypeIdentifier />
     <ShowAsAssociation>
-      <Property Name="_Parent" />
       <Property Name="GridState" />
+      <Property Name="_Parent" />
     </ShowAsAssociation>
   </Interface>
   <Interface Name="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridBlock_Base">
@@ -97,9 +97,9 @@
     <AssociationLine Name="_Parent" Type="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridBlock_Base" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="7" Y="1.188" />
-        <Point X="7.24" Y="1.188" />
-        <Point X="7.24" Y="0.26" />
-        <Point X="6.188" Y="0.26" />
+        <Point X="7.375" Y="1.188" />
+        <Point X="7.375" Y="0.125" />
+        <Point X="6.188" Y="0.125" />
         <Point X="6.188" Y="0.5" />
       </Path>
     </AssociationLine>

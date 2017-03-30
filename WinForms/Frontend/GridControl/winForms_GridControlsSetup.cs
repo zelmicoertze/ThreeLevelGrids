@@ -41,6 +41,18 @@ namespace DuctingGrids.Frontend.GridControl
             Layout_Resume(rootRow);
         }
 
+        /// <summary>
+        /// Creates the child grids.
+        /// </summary>
+        /// <param name="grid">The grid.</param>
+        /// <param name="rows">The rows.</param>
+        /// <param name="cols">The cols.</param>
+        public void CreateChildGrids(GridControl_Row rootRow, IGridControl grid, int rows, int cols)
+        {
+            Cuboid.CreateNewChildGrids(grid, onCreateGridControl, rows, cols);
+            Layout_Resume(rootRow);
+        }
+
         #region Private
         private void onCreateGridControl(IGridBlock_Base sender, enGrid_ControlType gridcontroltype, string parentname, string childname, 
             enGrid_BlockType blocktype, ref IGridControl gridcontrol)
