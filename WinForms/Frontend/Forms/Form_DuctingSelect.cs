@@ -142,14 +142,24 @@ namespace DuctingGrids.Frontend.Forms
         private void onGridClick(IGridControl sender)
         {
             // Fired when mouse click on a grid
-            var state = sender.GridState;
+            
+            IGridBlock_Base state = sender.GridState;
             var caption = state.Name_Caption;
-            if (state._Parent != null)
+            if (radioClick.Checked)
             {
-                caption = state._Parent.Name_Caption + " x " + caption;
-                if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption + " x " + caption;
+                // Click event message
+                if (state._Parent != null)
+                {
+                    caption = state._Parent.Name_Caption + " x " + caption;
+                    if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption + " x " + caption;
+                }
+                MessageBox.Show(caption, "Grid Feedback");
             }
-            MessageBox.Show(caption, "Grid Feedback");
+            if (radioSelect.Checked)
+            {
+                // Do selection of grids
+                var state 
+            }
         }
 
         private void button_LoadData_Click(object sender, EventArgs e)
@@ -176,6 +186,14 @@ namespace DuctingGrids.Frontend.Forms
         private void radioName_Click(object sender, EventArgs e)
         {
             RefreshGrid();
+        }
+
+        private void button_Add_Click(object sender, EventArgs e)
+        {
+            var cols = textGridCols.Text.zTo_Int();
+            var rows = textGridRows.Text.zTo_Int();
+
+
         }
     }
 }

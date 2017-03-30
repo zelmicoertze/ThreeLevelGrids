@@ -14,6 +14,7 @@ namespace DuctingGrids.Frontend.GridControl
     [BlueprintRule_Class(enBlueprintClassNetworkType.Node_Action)]
     public static class GridControlTools
     {
+
         /// <summary>Return new Grid control settings.</summary>
         /// <returns></returns>
         public static GridControl_Settings GridControl_Settings()
@@ -43,25 +44,17 @@ namespace DuctingGrids.Frontend.GridControl
 
 
 
-        /// <summary>Address to x and y.</summary>
-        /// <param name="address">The address.</param>
-        /// <param name="y">The y.</param>
-        /// <param name="x">The x.</param>
-        public static void Address_ToXY(string address, out int y, out int x)
-        {
-            var yStr = address.zvar_Id("_");   // Addresses must be name friendly
-            var xStr = address.zvar_Value("_");
-            y = yStr.zTo_Int();
-            x = xStr.zTo_Int();
-        }
 
-        /// <summary>Syncronise the settings with the frontend controls.</summary>
+        /// <summary>
+        /// Syncronise the settings with the frontend controls.
+        /// </summary>
         /// <param name="grids">The grids.</param>
         /// <param name="settings">The settings.</param>
         /// <param name="resetColors">if set to <c>true</c> [reset colors].</param>
         /// <param name="onGridChangeEvent">The on grid change.</param>
+        /// <param name="onGridCreate">The on grid create.</param>
         public static void Syncronise(GridBlock_5Setup grids, GridControl_Settings settings, bool resetColors = false, 
-                    onGrid_ChangeEvent onGridChangeEvent = null, onGrid_CreateControl onGridCreate = null)
+                    onGrid_ChangeEvent onGridChangeEvent = null)
         {
             settings.Refresh_Calculations();
             var cuboid = grids.GridCuboid as IGridBlock_Base;
