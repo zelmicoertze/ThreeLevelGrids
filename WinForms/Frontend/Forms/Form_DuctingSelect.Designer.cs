@@ -1,13 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
-using DuctingGrids.Frontend.GridControl;
 
 namespace DuctingGrids.Frontend.Forms
 {
-    sealed partial class Form2
+    partial class Form_DuctingSelect
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +31,6 @@ namespace DuctingGrids.Frontend.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.textMacroRows = new System.Windows.Forms.TextBox();
@@ -87,7 +82,6 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox10.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonGenerate
@@ -122,7 +116,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textMacroRows.Name = "textMacroRows";
             this.textMacroRows.Size = new System.Drawing.Size(53, 20);
             this.textMacroRows.TabIndex = 9;
-            this.textMacroRows.Text = "2";
+            this.textMacroRows.Text = "3";
             // 
             // textMacroCols
             // 
@@ -130,7 +124,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textMacroCols.Name = "textMacroCols";
             this.textMacroCols.Size = new System.Drawing.Size(53, 20);
             this.textMacroCols.TabIndex = 8;
-            this.textMacroCols.Text = "2";
+            this.textMacroCols.Text = "3";
             // 
             // label5
             // 
@@ -170,7 +164,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textSubRows.Name = "textSubRows";
             this.textSubRows.Size = new System.Drawing.Size(53, 20);
             this.textSubRows.TabIndex = 9;
-            this.textSubRows.Text = "2";
+            this.textSubRows.Text = "0";
             // 
             // textSubCols
             // 
@@ -178,7 +172,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textSubCols.Name = "textSubCols";
             this.textSubCols.Size = new System.Drawing.Size(53, 20);
             this.textSubCols.TabIndex = 8;
-            this.textSubCols.Text = "3";
+            this.textSubCols.Text = "0";
             // 
             // label3
             // 
@@ -218,7 +212,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textMicroRows.Name = "textMicroRows";
             this.textMicroRows.Size = new System.Drawing.Size(53, 20);
             this.textMicroRows.TabIndex = 9;
-            this.textMicroRows.Text = "5";
+            this.textMicroRows.Text = "0";
             // 
             // textMicroCols
             // 
@@ -226,7 +220,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textMicroCols.Name = "textMicroCols";
             this.textMicroCols.Size = new System.Drawing.Size(53, 20);
             this.textMicroCols.TabIndex = 8;
-            this.textMicroCols.Text = "5";
+            this.textMicroCols.Text = "0";
             // 
             // label2
             // 
@@ -547,15 +541,14 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox6.Size = new System.Drawing.Size(1148, 694);
             this.groupBox6.TabIndex = 19;
             this.groupBox6.TabStop = false;
-            
             // 
-            // Form2
+            // Form_DuctingSelect
             // 
             this.ClientSize = new System.Drawing.Size(1148, 779);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox4);
             this.DoubleBuffered = true;
-            this.Name = "Form2";
+            this.Name = "Form_DuctingSelect";
             this.Text = "Form2";
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -573,7 +566,6 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox8.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

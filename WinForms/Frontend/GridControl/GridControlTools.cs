@@ -41,12 +41,27 @@ namespace DuctingGrids.Frontend.GridControl
             return result;
         }
 
+
+
+        /// <summary>Address to x and y.</summary>
+        /// <param name="address">The address.</param>
+        /// <param name="y">The y.</param>
+        /// <param name="x">The x.</param>
+        public static void Address_ToXY(string address, out int y, out int x)
+        {
+            var yStr = address.zvar_Id("_");   // Addresses must be name friendly
+            var xStr = address.zvar_Value("_");
+            y = yStr.zTo_Int();
+            x = xStr.zTo_Int();
+        }
+
         /// <summary>Syncronise the settings with the frontend controls.</summary>
         /// <param name="grids">The grids.</param>
         /// <param name="settings">The settings.</param>
         /// <param name="resetColors">if set to <c>true</c> [reset colors].</param>
         /// <param name="onGridChangeEvent">The on grid change.</param>
-        public static void Syncronise(GridBlock_5Setup grids, GridControl_Settings settings, bool resetColors = false, onGrid_ChangeEvent onGridChangeEvent = null)
+        public static void Syncronise(GridBlock_5Setup grids, GridControl_Settings settings, bool resetColors = false, 
+                    onGrid_ChangeEvent onGridChangeEvent = null, onGrid_CreateControl onGridCreate = null)
         {
             settings.Refresh_Calculations();
             var cuboid = grids.GridCuboid as IGridBlock_Base;
@@ -89,6 +104,7 @@ namespace DuctingGrids.Frontend.GridControl
             }
         }
 
+        #region Private
         /// <summary>Synchronize grid values.</summary>
         /// <param name="grid">The grid.</param>
         /// <param name="gridControl">The grid control.</param>
@@ -239,18 +255,6 @@ namespace DuctingGrids.Frontend.GridControl
             }
             return result;
         }
-        
-
-        /// <summary>Address to x and y.</summary>
-        /// <param name="address">The address.</param>
-        /// <param name="y">The y.</param>
-        /// <param name="x">The x.</param>
-        public static void Address_ToXY(string address, out int y, out int x)
-        {
-            var yStr = address.zvar_Id("_");   // Addresses must be name friendly
-            var xStr = address.zvar_Value("_");
-            y = yStr.zTo_Int();
-            x = xStr.zTo_Int();
-        }
+        #endregion
     }
 }

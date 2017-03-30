@@ -17,7 +17,7 @@ using LamedalCore.zz;
 namespace DuctingGrids.Frontend.Forms
 {
     [Test_IgnoreCoverage(enTestIgnore.FrontendCode)]
-    public sealed partial class Form2 : Form
+    public partial class Form_DuctingSelect : Form
     {
         private readonly LamedalCore_ _lamed = LamedalCore_.Instance;
         private winForms_GridControlsSetup _grids = null;
@@ -25,34 +25,16 @@ namespace DuctingGrids.Frontend.Forms
         private GridControl_Settings _Settings;
         private DuctingControl _grid;
 
-        public Form2()
+        public Form_DuctingSelect()
         {
             InitializeComponent();
             _Settings = GridControlTools.GridControl_Settings();
             _loading = false;
-
-            //var gridDataSet = new DataSet();
-            //gridDataSet.ReadXml(@"C:\Users\zcoertze\Desktop\Grid_Test.xml");
-
-            //DataTable gridData = gridDataSet.Tables[0];
-
-            //int[] arrCounts = DuctingTools.BlockSizes(gridData);
-
-            //textMacroRows.Text = arrCounts[0].ToString();
-            //textMacroCols.Text = arrCounts[1].ToString();
-            //textSubRows.Text = arrCounts[2].ToString();
-            //textSubCols.Text = arrCounts[3].ToString();
-            //textMicroRows.Text = arrCounts[4].ToString();
-            //textMicroCols.Text = arrCounts[5].ToString();
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
             GenerateGrids();
-            //Frontend_Settings();
-            //_grid = new DuctingControl();
-            //_grid.Parent = R1;
-            //_grid.Dock = DockStyle.Fill;
         }
 
         private GridControl_Row R1 = null;
@@ -164,7 +146,7 @@ namespace DuctingGrids.Frontend.Forms
             var caption = state.Name_Caption;
             if (state._Parent != null)
             {
-                caption = state._Parent.Name_Caption + " x "+ caption;
+                caption = state._Parent.Name_Caption + " x " + caption;
                 if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption + " x " + caption;
             }
             MessageBox.Show(caption, "Grid Feedback");

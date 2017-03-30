@@ -18,7 +18,7 @@ namespace DuctingGrids.Frontend.Forms
             return sX.Substring(1, sX.Length - 1) + "_" + sY.Substring(0, sY.LastIndexOf('"'));
         }
 
-        public static void ReadGridDataFromFile(GridControls_Create grid, string fileName)
+        public static void ReadGridDataFromFile(winForms_GridControlsSetup grid, string fileName)
         {
             using (var sr = new StreamReader(fileName))
             {
@@ -140,7 +140,7 @@ namespace DuctingGrids.Frontend.Forms
         #endregion
 
         #region XML File
-        public static void ReadGridDataFromFile(GridControls_Create grid, DataTable gridData)
+        public static void ReadGridDataFromFile(winForms_GridControlsSetup grid, DataTable gridData)
         {
             foreach (DataRow dr in gridData.Rows)
             {
