@@ -205,9 +205,12 @@ namespace DuctingGrids.Frontend.Forms
                 return;
             }
 
-            IGridControl grid = _SelectedControls[0];
-            _grids.CreateChildGrids(R1, grid, rows, cols);
-
+            foreach (IGridControl gridControl in _SelectedControls)
+            {
+                _grids.CreateChildGrids(R1, gridControl, rows, cols);
+            }
+            RefreshGrid();
+            RefreshGrid();
         }
 
         
