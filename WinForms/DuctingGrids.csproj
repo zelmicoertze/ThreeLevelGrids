@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>CarabTekniva-Logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
@@ -62,17 +65,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Frontend\Forms\DuctingTools.cs" />
-    <Compile Include="Frontend\Forms\Form3.cs">
+    <Compile Include="Frontend\Forms\DuctingControlDebug.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frontend\Forms\Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="Frontend\Forms\DuctingControlDebug.Designer.cs">
+      <DependentUpon>DuctingControlDebug.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frontend\Forms\Form4.cs">
+    <Compile Include="Frontend\Forms\DuctingControlForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frontend\Forms\Form4.Designer.cs">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <Compile Include="Frontend\Forms\DuctingControlForm.Designer.cs">
+      <DependentUpon>DuctingControlForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Frontend\Forms\Form_DuctingSelect.cs">
       <SubType>Form</SubType>
@@ -85,6 +88,12 @@
     </Compile>
     <Compile Include="Frontend\GridControl\DuctingControl.Designer.cs">
       <DependentUpon>DuctingControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frontend\GridControl\DuctingControlButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Frontend\GridControl\DuctingControlButton.Designer.cs">
+      <DependentUpon>DuctingControlButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Frontend\GridControl\GridControlTools.cs" />
     <Compile Include="Frontend\GridControl\GridControl_Block.cs">
@@ -117,11 +126,11 @@
     <EmbeddedResource Include="Frontend\Forms\Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frontend\Forms\Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="Frontend\Forms\DuctingControlDebug.resx">
+      <DependentUpon>DuctingControlDebug.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frontend\Forms\Form4.resx">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <EmbeddedResource Include="Frontend\Forms\DuctingControlForm.resx">
+      <DependentUpon>DuctingControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frontend\Forms\Form_DuctingSelect.resx">
       <DependentUpon>Form_DuctingSelect.cs</DependentUpon>
@@ -159,6 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GridBlock\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CarabTekniva-Logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

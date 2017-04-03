@@ -21,8 +21,9 @@ namespace DuctingGrids
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new DuctingControlForm());
             //Application.Run(new Form4());
-            Application.Run(new Form_DuctingSelect());
+            //Application.Run(new Form_DuctingSelect());
         }
     }
 }

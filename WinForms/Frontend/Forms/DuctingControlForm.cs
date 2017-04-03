@@ -12,17 +12,15 @@ using LamedalCore.zPublicClass.GridBlock;
 
 namespace DuctingGrids.Frontend.Forms
 {
-    public partial class Form4 : Form
+    public partial class DuctingControlForm : Form
     {
         private DuctingControl _ductingControl;
-        //private bool _loading = true;
-        private GridControl_Settings _Settings;
+        private GridControl_Settings _settings;
 
-        public Form4()
+        public DuctingControlForm()
         {
             InitializeComponent();
-            _Settings = GridControlTools.GridControl_Settings();
-            //_loading = false;
+            _settings = GridControlTools.GridControl_Settings();
 
             var gridDataSet = new DataSet();
 
@@ -46,16 +44,17 @@ namespace DuctingGrids.Frontend.Forms
             {
                 _ductingControl = new DuctingControl();
             }
-
                 _ductingControl.gridWidth = int.Parse(textWidth.Text);
                 _ductingControl.gridHeight = int.Parse(textHeight.Text);
 
                 // Macro
                 _ductingControl.macroCols = int.Parse(textMacroCols.Text);
                 _ductingControl.macroRows = int.Parse(textMacroRows.Text);
+
                 // Sub
                 _ductingControl.subCols = int.Parse(textSubCols.Text);
                 _ductingControl.subRows = int.Parse(textSubRows.Text);
+
                 // Micro
                 _ductingControl.microCols = int.Parse(textMicroCols.Text);
                 _ductingControl.microRows = int.Parse(textMicroRows.Text);
@@ -74,7 +73,23 @@ namespace DuctingGrids.Frontend.Forms
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            _ductingControl.Refresh();
+            ReFreshData();
+            _ductingControl.RefreshGrids();
+        }
+
+        private void ReFreshData()
+        {
+            _ductingControl.gridWidth = int.Parse(textWidth.Text);
+            _ductingControl.gridHeight = int.Parse(textHeight.Text);
+
+            _ductingControl.macroCols = int.Parse(textMacroCols.Text);
+            _ductingControl.macroRows = int.Parse(textMacroRows.Text);
+
+            _ductingControl.subCols = int.Parse(textSubCols.Text);
+            _ductingControl.subRows = int.Parse(textSubRows.Text);
+
+            _ductingControl.microCols = int.Parse(textMicroCols.Text);
+            _ductingControl.microRows = int.Parse(textMicroRows.Text);
         }
 
         private void labelColor_Click(object sender, EventArgs e)
@@ -86,7 +101,11 @@ namespace DuctingGrids.Frontend.Forms
             colorDialog1.Color = control.BackColor;
             if (colorDialog1.ShowDialog() == DialogResult.OK) control.BackColor = colorDialog1.Color;
 
-            _ductingControl.Refresh();
+            _ductingControl.macroGridDefaultColor = labelColorMacro.BackColor;
+            _ductingControl.subGridDefaultColor = labelColorSub.BackColor;
+            _ductingControl.microGridDefaultColor = labelColorMicro.BackColor;
+
+            _ductingControl.RefreshGrids();
         }
 
         private void radioAddress_Click(object sender, EventArgs e)
@@ -109,10 +128,48 @@ namespace DuctingGrids.Frontend.Forms
             _ductingControl.displayName = bName;
             _ductingControl.displayAddress = bAddress;
             _ductingControl.displayValue = bValue;
-            _ductingControl.Frontend_Settings();
-            //GridControlTools.Syncronise(_ductingControl._grids.Cuboid, _Settings, true, _ductingControl.onGridChange);
-            //_ductingControl.GenerateGrids();
-            //_ductingControl.Refresh();
+            _ductingControl.RefreshGrids();
+        }
+
+        private void checkDisplay(bool bMicro, bool bSub, bool bMacro)
+        {
+            _ductingControl.visibleMicro = bMicro;
+            _ductingControl.visibleSub = bSub;
+            _ductingControl.visibleMacro = bMacro;
+            _ductingControl.RefreshGrids();
+        }
+
+        private void checkBox_Click(object sender, EventArgs e)
+        {
+            if (checkMacro.Checked == false)
+            {
+                checkDisplay(false, false, false);
+            }
+
+            if (checkMacro.Checked && checkSub.Checked == false)
+            {
+                checkDisplay(false, false, true);
+            }
+
+            if (checkMacro.Checked && checkSub.Checked && checkMicro.Checked)
+            {
+                checkDisplay(true, true, true);
+            }
+
+            if (checkMacro.Checked && checkSub.Checked && checkMicro.Checked == false)
+            {
+                checkDisplay(false, true, true);
+            }
+
+            if (checkMacro.Checked == false && checkSub.Checked && checkMicro.Checked == false)
+            {
+                checkDisplay(true, true, false);
+            }
+
+            if (checkMacro.Checked == false && checkSub.Checked == false && checkMicro.Checked)
+            {
+                checkDisplay(true, true, true);
+            }
         }
     }
 }
