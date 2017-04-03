@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DocumentFormat.OpenXml.Spreadsheet;
 using LamedalCore.domain.Attributes;
 using LamedalCore.domain.Enumerals;
@@ -14,6 +16,7 @@ namespace DuctingGrids.Frontend.GridControl
     [BlueprintRule_Class(enBlueprintClassNetworkType.Node_Action)]
     public static class GridControlTools
     {
+
         /// <summary>Return new Grid control settings.</summary>
         /// <returns></returns>
         public static GridControl_Settings GridControl_Settings()
@@ -41,68 +44,134 @@ namespace DuctingGrids.Frontend.GridControl
             return result;
         }
 
-        /// <summary>Syncronise the settings with the frontend controls.</summary>
+        /// <summary>
+        /// Syncronise the settings with the frontend controls.
+        /// </summary>
         /// <param name="grids">The grids.</param>
         /// <param name="settings">The settings.</param>
         /// <param name="resetColors">if set to <c>true</c> [reset colors].</param>
         /// <param name="onGridChangeEvent">The on grid change.</param>
-        public static void Syncronise(GridBlock_5Setup grids, GridControl_Settings settings, bool resetColors = false, onGrid_ChangeEvent onGridChangeEvent = null)
+        /// <param name="onGridCreate">The on grid create.</param>
+        public static void Syncronise(GridBlock_5Setup grids, GridControl_Settings settings, bool resetColors = false, 
+                    onGrid_ChangeEvent onGridChangeEvent = null)
         {
             settings.Refresh_Calculations();
+            
+
             var cuboid = grids.GridCuboid as IGridBlock_Base;
+            int addWidth = 10;
+            int addHeight = 26;
+
+            int widthTotal = 0;
+            int heightTotal = 0;
+            int widthMacro = 0;
+            int widthMacroMax = 0;
+            int heightMacro = 0;
+
+            // Calculate the sizes
+            List<IGridBlock_Base> macroGrids = cuboid.GridBlocksDictionary.Values.ToList();
+            foreach (IGridBlock_Base macro in macroGrids)
+            {
+                // Sub Grids
+                List<IGridBlock_Base> subGrids = macro.GridBlocksDictionary.Values.ToList();
+                int widthSub = 0;
+                int widthSubMax = 0;
+                int heightSub = 0;
+                foreach (IGridBlock_Base sub in subGrids)
+                {
+                    // Micro Grids
+                    var microGrids = sub.GridBlocksDictionary.Values.ToList();
+                    int widthMicro = 0;
+                    int widthMicroMax = 0;
+                    int heightMicro = 0;
+                    foreach (IGridBlock_Base micro in microGrids)
+                    {
+                        micro.zGridControl.Width = settings.Size_MicroWidth;
+                        micro.zGridControl._Parent.Width = settings.Size_MicroHeight;  // Row height
+                        GridSync_CalcSize(micro, ref widthMicro, ref heightMicro);   // update the grid settings
+                        widthMicroMax = Math.Max(widthMicroMax, widthMicro);
+                    }
+                    // Sub
+                    var subControl = sub.zGridControl;
+                    var subRow = subControl._Parent;
+                    subControl.Width = Math.Max(widthMicroMax + addWidth, settings.Min_SubSize);
+                    if (subControl.Left + subControl.Width > macro.zGridControl.Width) macro.zGridControl.Width = subControl.Left + subControl.Width + addWidth;   // Make sure children fit
+                    subRow.Height = Math.Max(subRow.Height, Math.Max(heightMicro + addHeight, settings.Min_SubSize));
+                    GridSync_CalcSize(sub, ref widthSub, ref heightSub);    // update the grid settings
+                    widthSubMax = Math.Max(widthSubMax, widthSub);
+                    //heightTotal += subRow.Height;
+                }
+                var macroControl = macro.zGridControl;
+                var macroRow = macroControl._Parent;
+                macroControl.Width = Math.Max(macroControl.Width, Math.Max(widthSubMax + addWidth, settings.Min_MacroSize));
+                if (macroControl.Left +macroControl.Width > cuboid.zGridControl.Width) cuboid.zGridControl.Width = macroControl.Left + macroControl.Width +addWidth;  // Make sure children fit
+                macroRow.Height = Math.Max(macroRow.Height, Math.Max(heightSub + addHeight, settings.Min_MacroSize));
+                GridSync_CalcSize(macro, ref widthMacro, ref heightMacro);   // update the grid settings
+                widthMacroMax = Math.Max(widthMacroMax, widthMacro);
+            }
             var cuboidControl = cuboid.zGridControl;
-            GridSync(cuboid, cuboidControl, settings, resetColors, onGridChangeEvent);
+            var cuboidRow = cuboidControl._Parent;
+            //cuboidControl.Width = widthMacroMax + addWidth;
+            cuboidRow.Height = heightMacro + addHeight;
 
             // Macro Grids
-            for (int iRow = 1; iRow <= grids.GridCuboid.Child_Rows; iRow++)
+            foreach (IGridBlock_Base macro in macroGrids)
             {
-                for (int iCol = 1; iCol <= grids.GridCuboid.Child_Cols; iCol++)
+                // Sub Grids
+                List<IGridBlock_Base> subGrids = macro.GridBlocksDictionary.Values.ToList();
+                foreach (IGridBlock_Base sub in subGrids)
                 {
-                    IGridBlock_Base macro = grids.GridCuboid.GetChild_GridBlock(String.Format("{0}_{1}", iRow, iCol));
-                    IGridControl macroControl = macro.zGridControl;
-                    GridSync(macro, macroControl, settings, resetColors, onGridChangeEvent);
-                    var macroState = macro as IGridBlock_ChildState;
-                    #region Sub Grids
-                    for (int rowSub = 1; rowSub <= macroState.Child_Rows; rowSub++)
+                    // Micro Grids
+                    var microGrids = sub.GridBlocksDictionary.Values.ToList();
+                    foreach (IGridBlock_Base micro in microGrids)
                     {
-                        for (int colSub = 1; colSub <= macroState.Child_Cols; colSub++)
-                        {
-                            var sub = macro.GetChild_GridBlock(String.Format("{0}_{1}", rowSub, colSub));
-                            var subControl = sub.zGridControl;
-                            GridSync(sub, subControl, settings, resetColors, onGridChangeEvent);
-                            var subState = sub as IGridBlock_ChildState;
-                            #region Micro Grids
-                            for (int microRow = 1; microRow <= subState.Child_Rows; microRow++)
-                            {
-                                for (int microCol = 1; microCol <= subState.Child_Cols; microCol++)
-                                {
-                                    var micro = sub.GetChild_GridBlock(String.Format("{0}_{1}", microRow, microCol));
-                                    var microControl = micro.zGridControl;
-                                    GridSync(micro, microControl, settings, resetColors, onGridChangeEvent);
-                                }
-                            }
-                            #endregion
-                        }
+                        GridSync(micro, settings, resetColors, onGridChangeEvent);   // update the grid settings
                     }
-                    #endregion
+                    GridSync(sub, settings, resetColors, onGridChangeEvent);    // update the grid settings
                 }
+                GridSync(macro, settings, resetColors, onGridChangeEvent);   // update the grid settings
+            }
+            GridSync(cuboid, settings, resetColors, onGridChangeEvent);  // update the grid settings
+        }
+
+        static int rowMax = 0;
+        private static void GridSync_CalcSize(IGridBlock_Base grid, ref int width, ref int height)
+        {
+            
+            IGridControl gridControl = grid.zGridControl;
+            var child = grid as IGridBlock_State;
+            if (child != null)
+            {
+                // Recalc sizes
+                if (child.State_Row != rowMax)
+                {
+                    // reset the row
+                    width = 0;
+                    rowMax = child.State_Row;
+                }
+                width += gridControl.Width; // Only increase width on first row
+
+                if (child.State_Col == 1) height += gridControl._Parent.Height; // Only increase height on first col
             }
         }
 
-        /// <summary>Synchronize grid values.</summary>
+        #region Private
+        /// <summary>
+        /// Synchronize grid values.
+        /// </summary>
         /// <param name="grid">The grid.</param>
-        /// <param name="gridControl">The grid control.</param>
-        /// <param name="settings"></param>
+        /// <param name="settings">The settings.</param>
         /// <param name="resetColors">if set to <c>true</c> [reset colors].</param>
         /// <param name="onGridChangeEvent">The on grid change.</param>
         [Test_IgnoreCoverage(enTestIgnore.FrontendCode)]
-        private static void GridSync(IGridBlock_Base grid, IGridControl gridControl, GridControl_Settings settings, bool resetColors, onGrid_ChangeEvent onGridChangeEvent)
+        private static void GridSync(IGridBlock_Base grid, GridControl_Settings settings, bool resetColors, onGrid_ChangeEvent onGridChangeEvent)
         {
+            IGridControl gridControl = grid.zGridControl;
             if (gridControl == null) return;  // Testing code  
 
             var parent = grid._Parent as IGridBlock_ChildState;
             var child = grid as IGridBlock_State;
-
+            
             if (parent == null)
             {
                 // Cuboid
@@ -221,36 +290,24 @@ namespace DuctingGrids.Frontend.GridControl
         [Test_IgnoreCoverage(enTestIgnore.FrontendCode)]
         private static bool GridSync_Size(IGridBlock_State grid, IGridControl gridControl, int controlWidth, int controlHeight)
         {
-            //return false;
-            //if (gridControl.Text == "5.1") gridControl.Text = "5.1";
-            var result = false;
-            if (gridControl.Width != controlWidth)
-            {
-                gridControl.Width = controlWidth;
-                result = true;
-            }
-            if (grid != null && grid.State_Col != 1) return result;
+            return false;
+            ////if (gridControl.Text == "5.1") gridControl.Text = "5.1";
+            //var result = false;
+            //if (gridControl.Width != controlWidth)
+            //{
+            //    gridControl.Width = controlWidth;
+            //    result = true;
+            //}
+            //if (grid != null && grid.State_Col != 1) return result;
 
-            var parent = gridControl._Parent;
-            if (parent.Height != controlHeight)
-            {
-                parent.Height = controlHeight;
-                result = true;
-            }
-            return result;
+            //var parent = gridControl._Parent;
+            //if (parent.Height != controlHeight)
+            //{
+            //    parent.Height = controlHeight;
+            //    result = true;
+            //}
+            //return result;
         }
-        
-
-        /// <summary>Address to x and y.</summary>
-        /// <param name="address">The address.</param>
-        /// <param name="y">The y.</param>
-        /// <param name="x">The x.</param>
-        public static void Address_ToXY(string address, out int y, out int x)
-        {
-            var yStr = address.zvar_Id("_");   // Addresses must be name friendly
-            var xStr = address.zvar_Value("_");
-            y = yStr.zTo_Int();
-            x = xStr.zTo_Int();
-        }
+        #endregion
     }
 }

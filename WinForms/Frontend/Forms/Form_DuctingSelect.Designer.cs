@@ -1,13 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
-using DuctingGrids.Frontend.GridControl;
 
 namespace DuctingGrids.Frontend.Forms
 {
-    sealed partial class Form2
+    partial class Form_DuctingSelect
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +31,6 @@ namespace DuctingGrids.Frontend.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.textMacroRows = new System.Windows.Forms.TextBox();
@@ -57,6 +52,12 @@ namespace DuctingGrids.Frontend.Forms
             this.checkSub = new System.Windows.Forms.CheckBox();
             this.checkMacro = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.button_Add = new System.Windows.Forms.Button();
+            this.textGridRows = new System.Windows.Forms.TextBox();
+            this.textGridCols = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.radioSelect = new System.Windows.Forms.RadioButton();
             this.radioClick = new System.Windows.Forms.RadioButton();
@@ -83,11 +84,11 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonGenerate
@@ -122,7 +123,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textMacroRows.Name = "textMacroRows";
             this.textMacroRows.Size = new System.Drawing.Size(53, 20);
             this.textMacroRows.TabIndex = 9;
-            this.textMacroRows.Text = "2";
+            this.textMacroRows.Text = "3";
             // 
             // textMacroCols
             // 
@@ -130,7 +131,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textMacroCols.Name = "textMacroCols";
             this.textMacroCols.Size = new System.Drawing.Size(53, 20);
             this.textMacroCols.TabIndex = 8;
-            this.textMacroCols.Text = "2";
+            this.textMacroCols.Text = "3";
             // 
             // label5
             // 
@@ -163,6 +164,7 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sub";
+            this.groupBox2.Visible = false;
             // 
             // textSubRows
             // 
@@ -170,7 +172,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textSubRows.Name = "textSubRows";
             this.textSubRows.Size = new System.Drawing.Size(53, 20);
             this.textSubRows.TabIndex = 9;
-            this.textSubRows.Text = "2";
+            this.textSubRows.Text = "0";
             // 
             // textSubCols
             // 
@@ -178,7 +180,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textSubCols.Name = "textSubCols";
             this.textSubCols.Size = new System.Drawing.Size(53, 20);
             this.textSubCols.TabIndex = 8;
-            this.textSubCols.Text = "3";
+            this.textSubCols.Text = "0";
             // 
             // label3
             // 
@@ -211,6 +213,7 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Micro";
+            this.groupBox1.Visible = false;
             // 
             // textMicroRows
             // 
@@ -218,7 +221,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textMicroRows.Name = "textMicroRows";
             this.textMicroRows.Size = new System.Drawing.Size(53, 20);
             this.textMicroRows.TabIndex = 9;
-            this.textMicroRows.Text = "5";
+            this.textMicroRows.Text = "0";
             // 
             // textMicroCols
             // 
@@ -226,7 +229,7 @@ namespace DuctingGrids.Frontend.Forms
             this.textMicroCols.Name = "textMicroCols";
             this.textMicroCols.Size = new System.Drawing.Size(53, 20);
             this.textMicroCols.TabIndex = 8;
-            this.textMicroCols.Text = "5";
+            this.textMicroCols.Text = "0";
             // 
             // label2
             // 
@@ -303,6 +306,7 @@ namespace DuctingGrids.Frontend.Forms
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.groupBox11);
             this.groupBox4.Controls.Add(this.groupBox7);
             this.groupBox4.Controls.Add(this.buttonRefresh);
             this.groupBox4.Controls.Add(this.groupBox10);
@@ -322,6 +326,66 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Toolbar";
             // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.button_Add);
+            this.groupBox11.Controls.Add(this.textGridRows);
+            this.groupBox11.Controls.Add(this.textGridCols);
+            this.groupBox11.Controls.Add(this.label9);
+            this.groupBox11.Controls.Add(this.label10);
+            this.groupBox11.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox11.Location = new System.Drawing.Point(629, 16);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(143, 66);
+            this.groupBox11.TabIndex = 25;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Add Grids";
+            // 
+            // button_Add
+            // 
+            this.button_Add.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button_Add.Location = new System.Drawing.Point(102, 16);
+            this.button_Add.Name = "button_Add";
+            this.button_Add.Size = new System.Drawing.Size(38, 47);
+            this.button_Add.TabIndex = 10;
+            this.button_Add.Text = "Add";
+            this.button_Add.UseVisualStyleBackColor = true;
+            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
+            // 
+            // textGridRows
+            // 
+            this.textGridRows.Location = new System.Drawing.Point(57, 38);
+            this.textGridRows.Name = "textGridRows";
+            this.textGridRows.Size = new System.Drawing.Size(39, 20);
+            this.textGridRows.TabIndex = 9;
+            this.textGridRows.Text = "3";
+            // 
+            // textGridCols
+            // 
+            this.textGridCols.Location = new System.Drawing.Point(57, 13);
+            this.textGridCols.Name = "textGridCols";
+            this.textGridCols.Size = new System.Drawing.Size(39, 20);
+            this.textGridCols.TabIndex = 8;
+            this.textGridCols.Text = "3";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(9, 38);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Rows";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(27, 13);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Cols";
+            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.radioSelect);
@@ -334,29 +398,28 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox7.TabIndex = 18;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "DisplayMode";
-            this.groupBox7.Visible = false;
             // 
             // radioSelect
             // 
             this.radioSelect.AutoSize = true;
+            this.radioSelect.Checked = true;
             this.radioSelect.Dock = System.Windows.Forms.DockStyle.Top;
             this.radioSelect.Location = new System.Drawing.Point(3, 50);
             this.radioSelect.Name = "radioSelect";
             this.radioSelect.Size = new System.Drawing.Size(86, 17);
             this.radioSelect.TabIndex = 4;
+            this.radioSelect.TabStop = true;
             this.radioSelect.Text = "Select";
             this.radioSelect.UseVisualStyleBackColor = true;
             // 
             // radioClick
             // 
             this.radioClick.AutoSize = true;
-            this.radioClick.Checked = true;
             this.radioClick.Dock = System.Windows.Forms.DockStyle.Top;
             this.radioClick.Location = new System.Drawing.Point(3, 33);
             this.radioClick.Name = "radioClick";
             this.radioClick.Size = new System.Drawing.Size(86, 17);
             this.radioClick.TabIndex = 3;
-            this.radioClick.TabStop = true;
             this.radioClick.Text = "Click";
             this.radioClick.UseVisualStyleBackColor = true;
             // 
@@ -547,16 +610,17 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox6.Size = new System.Drawing.Size(1148, 694);
             this.groupBox6.TabIndex = 19;
             this.groupBox6.TabStop = false;
-            
             // 
-            // Form2
+            // Form_DuctingSelect
             // 
             this.ClientSize = new System.Drawing.Size(1148, 779);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox4);
             this.DoubleBuffered = true;
-            this.Name = "Form2";
+            this.Name = "Form_DuctingSelect";
             this.Text = "Form2";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_DuctingSelect_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form_DuctingSelect_KeyUp);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -566,6 +630,8 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -573,7 +639,6 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox8.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -622,5 +687,11 @@ namespace DuctingGrids.Frontend.Forms
         private Label labelColorMacro;
         private ColorDialog colorDialog1;
         private Button buttonRefresh;
+        private GroupBox groupBox11;
+        private Button button_Add;
+        private TextBox textGridRows;
+        private TextBox textGridCols;
+        private Label label9;
+        private Label label10;
     }
 }

@@ -9,8 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
-using DevExpress.Utils;
-using DevExpress.XtraEditors;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Vml.Spreadsheet;
 using DuctingGrids.Frontend.Forms;
@@ -21,7 +19,6 @@ using LamedalCore.zPublicClass.GridBlock.GridInterface;
 namespace DuctingGrids.Frontend.GridControl
 {
     [ToolboxItem(true)]
-    [ToolboxTabName("")]
     [DefaultEvent("")]
     [Description("")]
     public partial class DuctingControl : Control
@@ -29,7 +26,7 @@ namespace DuctingGrids.Frontend.GridControl
         private GridControl_Row _panelRow;
         private bool _refreshGrid;
         private GridControl_Settings _Settings = GridControlTools.GridControl_Settings();
-        public GridControls_Create _grids;
+        public winForms_GridControlsSetup _grids;
 
         public DuctingControl()
         {
@@ -167,7 +164,7 @@ namespace DuctingGrids.Frontend.GridControl
 
         public void GenerateGrids()
         {
-            _grids = new GridControls_Create(_panelRow, _Settings, onGridClick);
+            _grids = new winForms_GridControlsSetup(_panelRow, _Settings, onGridClick);
         }
 
         public void Frontend_Settings()
