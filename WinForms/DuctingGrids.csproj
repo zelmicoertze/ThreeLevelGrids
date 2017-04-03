@@ -37,6 +37,9 @@
       <HintPath>..\..\..\..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LamedalCore, Version=1.1.4.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Lamedal\trunk\packages\LamedalCore.1.1.4-alfa02\lib\net461\LamedalCore.dll</HintPath>
+    </Reference>
     <Reference Include="LamedalExcel, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LamedalExcel.1.0.1\lib\net461\LamedalExcel.dll</HintPath>
       <Private>True</Private>
@@ -156,12 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GridBlock\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Lamedal\trunk\LamedalCore\LamedalCore\LamedalCore.csproj">
-      <Project>{282eaf3f-9823-4211-b580-267621e9fae0}</Project>
-      <Name>LamedalCore</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

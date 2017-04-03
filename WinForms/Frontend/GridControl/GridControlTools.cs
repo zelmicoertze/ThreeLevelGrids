@@ -103,7 +103,7 @@ namespace DuctingGrids.Frontend.GridControl
                 }
                 var macroControl = macro.zGridControl;
                 var macroRow = macroControl._Parent;
-                macroControl.Width = Math.Max(widthSubMax + addWidth, settings.Min_MacroSize);
+                macroControl.Width = Math.Max(macroControl.Width, Math.Max(widthSubMax + addWidth, settings.Min_MacroSize));
                 if (macroControl.Left +macroControl.Width > cuboid.zGridControl.Width) cuboid.zGridControl.Width = macroControl.Left + macroControl.Width +addWidth;  // Make sure children fit
                 macroRow.Height = Math.Max(macroRow.Height, Math.Max(heightSub + addHeight, settings.Min_MacroSize));
                 GridSync_CalcSize(macro, ref widthMacro, ref heightMacro);   // update the grid settings
