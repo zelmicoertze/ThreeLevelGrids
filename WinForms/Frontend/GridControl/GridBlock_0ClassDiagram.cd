@@ -18,40 +18,16 @@
   </Class>
   <Class Name="LamedalCore.zPublicClass.GridBlock.GridBlock_2Sub">
     <Position X="3.75" Y="4.75" Width="3.25" />
-    <InheritanceLine Type="LamedalCore.zPublicClass.GridBlock.GridBlock_0Base" ManuallyRouted="true" FixedToPoint="true">
-      <Path>
-        <Point X="1.875" Y="3.594" />
-        <Point X="1.875" Y="3.838" />
-        <Point X="6.125" Y="3.838" />
-        <Point X="6.125" Y="4.75" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="LamedalCore.zPublicClass.GridBlock.GridBlock_3Macro">
     <Position X="7.25" Y="4.75" Width="3.25" />
-    <InheritanceLine Type="LamedalCore.zPublicClass.GridBlock.GridBlock_0Base" ManuallyRouted="true" FixedToPoint="true">
-      <Path>
-        <Point X="1.875" Y="3.594" />
-        <Point X="1.875" Y="3.811" />
-        <Point X="9.312" Y="3.811" />
-        <Point X="9.312" Y="4.75" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="LamedalCore.zPublicClass.GridBlock.GridBlock_4Cuboid">
     <Position X="10.75" Y="4.75" Width="3.25" />
-    <InheritanceLine Type="LamedalCore.zPublicClass.GridBlock.GridBlock_0Base" ManuallyRouted="true" FixedToPoint="true">
-      <Path>
-        <Point X="1.875" Y="3.594" />
-        <Point X="1.875" Y="3.826" />
-        <Point X="12.812" Y="3.826" />
-        <Point X="12.812" Y="4.75" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
@@ -64,9 +40,9 @@
     <AssociationLine Name="_Parent" Type="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridBlock_Base" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="6.75" Y="1.062" />
-        <Point X="6.99" Y="1.062" />
-        <Point X="6.99" Y="0.26" />
-        <Point X="5.796" Y="0.26" />
+        <Point X="7.05" Y="1.062" />
+        <Point X="7.05" Y="0.2" />
+        <Point X="5.796" Y="0.2" />
         <Point X="5.796" Y="0.5" />
       </Path>
     </AssociationLine>
@@ -87,7 +63,7 @@
     <Position X="9" Y="2.75" Width="1.75" />
     <InheritanceLine Type="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridBlock_State" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="12.125" Y="2.565" />
+        <Point X="12.125" Y="2.757" />
         <Point X="12.125" Y="3.346" />
         <Point X="10.75" Y="3.346" />
         <Point X="10.75" Y="3.125" />

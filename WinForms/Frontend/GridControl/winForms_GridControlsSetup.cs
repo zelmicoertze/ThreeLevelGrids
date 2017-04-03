@@ -11,7 +11,7 @@ using LamedalCore.zPublicClass.GridBlock.GridInterface;
 
 namespace DuctingGrids.Frontend.GridControl
 {
-    public sealed class GridControls_Create
+    public sealed class winForms_GridControlsSetup
     {
         /// <summary>Store a quick reference to all the grid controls.</summary>
         private static readonly Dictionary<string, IGridControl> _gridControls = new Dictionary<string, IGridControl>();   // rows
@@ -26,7 +26,7 @@ namespace DuctingGrids.Frontend.GridControl
         /// <param name="settings">The settings.</param>
         /// <param name="onClick">The on click.</param>
         /// <returns></returns>
-        public GridControls_Create(GridControl_Row rootRow, GridControl_Settings settings, onGrid_Click onClick)        // Starting row                                        
+        public winForms_GridControlsSetup(GridControl_Row rootRow, GridControl_Settings settings, onGrid_Click onClick)        // Starting row                                        
         {
             _Settings = settings;
             if (onClick != null)
@@ -41,7 +41,19 @@ namespace DuctingGrids.Frontend.GridControl
             Layout_Resume(rootRow);
         }
 
+        /// <summary>
+        /// Creates the child grids.
+        /// </summary>
+        /// <param name="grid">The grid.</param>
+        /// <param name="rows">The rows.</param>
+        /// <param name="cols">The cols.</param>
+        public void CreateChildGrids(GridControl_Row rootRow, IGridControl grid, int rows, int cols)
+        {
+            Cuboid.CreateNewChildGrids(grid, onCreateGridControl, rows, cols);
+            Layout_Resume(rootRow);
+        }
 
+        #region Private
         private void onCreateGridControl(IGridBlock_Base sender, enGrid_ControlType gridcontroltype, string parentname, string childname, 
             enGrid_BlockType blocktype, ref IGridControl gridcontrol)
         {
@@ -290,5 +302,6 @@ namespace DuctingGrids.Frontend.GridControl
             var control = sender as IGridControl;
             if (_onClickEvent != null) _onClickEvent(control);
         }
+        #endregion
     }
 }
