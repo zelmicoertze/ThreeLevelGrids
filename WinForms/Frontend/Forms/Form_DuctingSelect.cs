@@ -17,7 +17,7 @@ using LamedalCore.zz;
 namespace DuctingGrids.Frontend.Forms
 {
     [Test_IgnoreCoverage(enTestIgnore.FrontendCode)]
-    public sealed partial class Form2 : Form
+    public partial class Form_DuctingSelect : Form
     {
         private readonly LamedalCore_ _lamed = LamedalCore_.Instance;
         private winForms_GridControlsSetup _grids = null;
@@ -25,37 +25,21 @@ namespace DuctingGrids.Frontend.Forms
         private GridControl_Settings _Settings;
         private DuctingControl _grid;
 
-        public Form2()
+        public Form_DuctingSelect()
         {
             InitializeComponent();
             _Settings = GridControlTools.GridControl_Settings();
             _loading = false;
-
-            //var gridDataSet = new DataSet();
-            //gridDataSet.ReadXml(@"C:\Users\zcoertze\Desktop\Grid_Test.xml");
-
-            //DataTable gridData = gridDataSet.Tables[0];
-
-            //int[] arrCounts = DuctingTools.BlockSizes(gridData);
-
-            //textMacroRows.Text = arrCounts[0].ToString();
-            //textMacroCols.Text = arrCounts[1].ToString();
-            //textSubRows.Text = arrCounts[2].ToString();
-            //textSubCols.Text = arrCounts[3].ToString();
-            //textMicroRows.Text = arrCounts[4].ToString();
-            //textMicroCols.Text = arrCounts[5].ToString();
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
             GenerateGrids();
-            //Frontend_Settings();
-            //_grid = new DuctingControl();
-            //_grid.Parent = R1;
-            //_grid.Dock = DockStyle.Fill;
         }
 
         private GridControl_Row R1 = null;
+        private bool _Ctrl = false;
+        private List<IGridControl> _SelectedControls = new List<IGridControl>();
 
         private void GenerateGrids()
         {
@@ -110,6 +94,7 @@ namespace DuctingGrids.Frontend.Forms
 
         private void RefreshGrid()
         {
+            _SelectedControls.Clear();  // Clear all selected controls
             Frontend_Settings();
             if (_grids == null) GenerateGrids();
             GridControlTools.Syncronise(_grids.Cuboid, _Settings, true, onGridChange);
@@ -160,14 +145,27 @@ namespace DuctingGrids.Frontend.Forms
         private void onGridClick(IGridControl sender)
         {
             // Fired when mouse click on a grid
-            var state = sender.GridState;
-            var caption = state.Name_Caption;
-            if (state._Parent != null)
+            
+            IGridBlock_Base gridData = sender.GridState;
+            var caption = gridData.Name_Caption;
+            if (radioClick.Checked)
             {
-                caption = state._Parent.Name_Caption + " x "+ caption;
-                if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption + " x " + caption;
+                // Click event message
+                if (gridData._Parent != null)
+                {
+                    caption = gridData._Parent.Name_Caption + " x " + caption;
+                    if (gridData._Parent._Parent != null) caption = gridData._Parent._Parent.Name_Caption + " x " + caption;
+                }
+                MessageBox.Show(caption, "Grid Feedback");
             }
-            MessageBox.Show(caption, "Grid Feedback");
+            if (radioSelect.Checked)
+            {
+                // Do selection of grids
+                if (ModifierKeys.HasFlag(Keys.Control) == false && ModifierKeys.HasFlag(Keys.Shift) == false) RefreshGrid();  // Remove previous selections
+                _SelectedControls.Add(sender);
+                var gridState = gridData as IGridBlock_State;
+                sender.BackColor = Color.CadetBlue;
+            }
         }
 
         private void button_LoadData_Click(object sender, EventArgs e)
@@ -194,6 +192,37 @@ namespace DuctingGrids.Frontend.Forms
         private void radioName_Click(object sender, EventArgs e)
         {
             RefreshGrid();
+        }
+
+        private void button_Add_Click(object sender, EventArgs e)
+        {
+            var cols = textGridCols.Text.zTo_Int();
+            var rows = textGridRows.Text.zTo_Int();
+
+            if (_SelectedControls.Count == 0)
+            {
+                MessageBox.Show("Please select grids first!", "Grid Feedback");
+                return;
+            }
+
+            foreach (IGridControl gridControl in _SelectedControls)
+            {
+                _grids.CreateChildGrids(R1, gridControl, rows, cols);
+            }
+            RefreshGrid();
+            RefreshGrid();
+        }
+
+        
+
+        private void Form_DuctingSelect_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Control) _Ctrl = true;
+        }
+
+        private void Form_DuctingSelect_KeyUp(object sender, KeyEventArgs e)
+        {
+            //_Ctrl = false;
         }
     }
 }

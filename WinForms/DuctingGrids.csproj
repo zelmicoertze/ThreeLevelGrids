@@ -36,25 +36,12 @@
     <ApplicationIcon>CarabTekniva-Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Charts.v14.1.Core, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Data.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Printing.v14.1.Core, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraBars.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v14.1.UI, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraCharts.v14.1.Wizard, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraGrid.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraPrinting.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="LamedalCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LamedalCore.1.1.4-alfa01\lib\net461\LamedalCore.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="LamedalCore, Version=1.1.4.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Lamedal\trunk\packages\LamedalCore.1.1.4-alfa02\lib\net461\LamedalCore.dll</HintPath>
     </Reference>
     <Reference Include="LamedalExcel, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LamedalExcel.1.0.1\lib\net461\LamedalExcel.dll</HintPath>
@@ -90,6 +77,12 @@
     <Compile Include="Frontend\Forms\DuctingControlForm.Designer.cs">
       <DependentUpon>DuctingControlForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frontend\Forms\Form_DuctingSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frontend\Forms\Form_DuctingSelect.Designer.cs">
+      <DependentUpon>Form_DuctingSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frontend\GridControl\DuctingControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -112,7 +105,7 @@
     <Compile Include="Frontend\GridControl\GridControl_Row.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Frontend\GridControl\GridControls_Create.cs" />
+    <Compile Include="Frontend\GridControl\winForms_GridControlsSetup.cs" />
     <Compile Include="Frontend\Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,10 +132,12 @@
     <EmbeddedResource Include="Frontend\Forms\DuctingControlForm.resx">
       <DependentUpon>DuctingControlForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Frontend\Forms\Form_DuctingSelect.resx">
+      <DependentUpon>Form_DuctingSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Frontend\GridControl\DuctingControl.resx">
       <DependentUpon>DuctingControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
