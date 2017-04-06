@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Lamedal\trunk\LamedalCore\LamedalCore\LamedalCore.csproj">
-      <Project>{282eaf3f-9823-4211-b580-267621e9fae0}</Project>
+      <Project>{7108a70f-9bcb-40d6-a74b-cc997ca707e1}</Project>
       <Name>LamedalCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WinForms\DuctingGrids.csproj">
