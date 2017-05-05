@@ -43,9 +43,6 @@
     <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\..\..\Lamedal\trunk\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="LamedalCore, Version=1.1.4.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Lamedal\trunk\packages\LamedalCore.1.1.4-alfa04\lib\net461\LamedalCore.dll</HintPath>
-    </Reference>
     <Reference Include="LamedalExcel, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LamedalExcel.1.0.1\lib\net461\LamedalExcel.dll</HintPath>
       <Private>True</Private>
@@ -165,6 +162,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GridBlock\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LamedalCore\src\LamedalCore.csproj">
+      <Project>{cce0b77c-74ca-4e22-bebf-6a69cfa5442e}</Project>
+      <Name>LamedalCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
