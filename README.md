@@ -12,4 +12,4 @@ Create a 3 level grid dashboard to show and capture information located in 3D sp
 ![alt tag](https://github.com/perezLamed/ThreeLevelGrids/blob/master/Pics/Setup3.png)
 
 
-MIT license.
+MIT License
