@@ -131,7 +131,15 @@ namespace DuctingGridsTest.Tests
                 state.State_ValueDouble = 2.333;
                 state.State_Color = Color.Black;
             }
-            GridControlTools.Syncronise(gridCuboid, settings, true, OnGridChangeEvent); // Sync with the front-end controls
+            // 2.1
+            state = gridCuboid.GetChild_MicroGridBlock("1_1", "1_1", "2_1") as IGridBlock_State;
+            if (state != null)
+            {
+                state.State_Id = 3;
+                state.State_ValueDouble = 3.333;
+                state.State_Color = Color.BlueViolet;
+            }
+            GridControlTools.Syncronise(gridCuboid, settings, true, null); // Sync with the front-end controls
             #endregion
 
             #region Test Grid (1.1),(1.1),(1.1)
@@ -146,7 +154,6 @@ namespace DuctingGridsTest.Tests
             Assert.Equal(1, gridMicro1_State.State_Id);
             Assert.Equal(1.5, gridMicro1_State.State_ValueDouble);
             Assert.Equal(false, gridMicro1_State.State_Selected);
-            //Assert.Equal(Color.Green, gridMicro1.zGridControl.BackColor);
 
             #endregion
             #region Test Grid (1.1),(1.1),(1.2)
@@ -201,6 +208,19 @@ namespace DuctingGridsTest.Tests
             Assert.Equal(2.333, gridMicro5_State.State_ValueDouble);
             Assert.Equal(false, gridMicro5_State.State_Selected);
             #endregion
+            #region Test Grid (1.1),(1.1),(2.1)
+            IGridBlock_Base gridMicro21 = gridCuboid.GetChild_MicroGridBlock("1_1", "1_1", "2_1");
+            Assert.Equal("2.1", gridMicro21.Name_Caption);
+            Assert.Equal("2_1", gridMicro21.Name_Address);
+            var gridMicro21_State = gridMicro21 as IGridBlock_State;
+            Assert.False(gridMicro21_State == null);
+            Assert.Equal(2, gridMicro21_State.State_Row);
+            Assert.Equal(1, gridMicro21_State.State_Col);
+            Assert.Equal(Color.BlueViolet, gridMicro21_State.State_Color);
+            Assert.Equal(3, gridMicro21_State.State_Id);
+            Assert.Equal(3.333, gridMicro21_State.State_ValueDouble);
+            Assert.Equal(false, gridMicro21_State.State_Selected);
+            #endregion
             #endregion
         }
 
@@ -208,5 +228,8 @@ namespace DuctingGridsTest.Tests
         {
             // Fire when change happened
         }
+
+        
+
     }
 }
