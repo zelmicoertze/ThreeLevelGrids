@@ -28,7 +28,7 @@ namespace DuctingGrids.Frontend.Forms
         public Form2()
         {
             InitializeComponent();
-            _Settings = GridControlTools.GridControl_Settings();
+            _Settings = GridControlTools.GridControl_Settings_Setup();
             _loading = false;
 
             //var gridDataSet = new DataSet();

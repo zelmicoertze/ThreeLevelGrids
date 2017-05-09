@@ -25,7 +25,7 @@ namespace DuctingGrids.Frontend.GridControl
     {
         private GridControl_Row _panelRow;
         private bool _refreshGrid;
-        private GridControl_Settings _Settings = GridControlTools.GridControl_Settings();
+        private GridControl_Settings _Settings = GridControlTools.GridControl_Settings_Setup();
         public winForms_GridControlsSetup _grids;
 
         public DuctingControl()
@@ -224,10 +224,10 @@ namespace DuctingGrids.Frontend.GridControl
             _Settings.Color_ID.Add(4, System.Drawing.Color.Red);
             _Settings.Color_ID.Add(5, System.Drawing.Color.Yellow);
 
-            Refresh();
+            RefreshGrids();
         }
 
-        private void Refresh()
+        private void RefreshGrids()
         {
             Frontend_Settings();
             if (_grids == null) GenerateGrids();

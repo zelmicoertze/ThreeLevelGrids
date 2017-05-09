@@ -64,8 +64,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Lamedal\trunk\LamedalCore\LamedalCore\LamedalCore.csproj">
-      <Project>{7108a70f-9bcb-40d6-a74b-cc997ca707e1}</Project>
+    <ProjectReference Include="..\..\..\LamedalCore\src\LamedalCore.csproj">
+      <Project>{cce0b77c-74ca-4e22-bebf-6a69cfa5442e}</Project>
       <Name>LamedalCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WinForms\DuctingGrids.csproj">
@@ -73,6 +73,5 @@
       <Name>DuctingGrids</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

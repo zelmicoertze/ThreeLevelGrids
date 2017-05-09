@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuctingGrids", "WinForms\Du
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LamedalCore", "..\LamedalCore\src\LamedalCore.csproj", "{CCE0B77C-74CA-4E22-BEBF-6A69CFA5442E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuctingGridsTest", "Test\DuctingGridsTest\DuctingGridsTest.csproj", "{B9C1825C-6042-45E0-A274-EA963993EAB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CCE0B77C-74CA-4E22-BEBF-6A69CFA5442E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCE0B77C-74CA-4E22-BEBF-6A69CFA5442E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCE0B77C-74CA-4E22-BEBF-6A69CFA5442E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9C1825C-6042-45E0-A274-EA963993EAB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9C1825C-6042-45E0-A274-EA963993EAB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9C1825C-6042-45E0-A274-EA963993EAB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9C1825C-6042-45E0-A274-EA963993EAB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

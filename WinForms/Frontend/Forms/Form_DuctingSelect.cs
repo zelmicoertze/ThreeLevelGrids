@@ -28,7 +28,7 @@ namespace DuctingGrids.Frontend.Forms
         public Form_DuctingSelect()
         {
             InitializeComponent();
-            _Settings = GridControlTools.GridControl_Settings();
+            _Settings = GridControlTools.GridControl_Settings_Setup();
             _loading = false;
         }
 
