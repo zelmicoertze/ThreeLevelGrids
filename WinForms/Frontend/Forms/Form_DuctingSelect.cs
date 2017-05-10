@@ -139,6 +139,18 @@ namespace DuctingGrids.Frontend.Forms
             if (radioValue.Checked) _Settings.DisplayMode_MicroGrids = enGrid_BlockDisplayType.Value;
             if (radioName.Checked) _Settings.DisplayMode_MicroGrids = enGrid_BlockDisplayType.Name;
 
+            // Caption order
+            _Settings.Address_Col = enGrid_AddressValue.Numeric;
+            _Settings.Address_Seperator = ".";
+            if (radioRowCol.Checked) _Settings.Address_Order = enGrid_AddressDefOrder.RowCol;
+            else if (radioColRow.Checked) _Settings.Address_Order = enGrid_AddressDefOrder.ColRow;
+            else
+            {
+                _Settings.Address_Order = enGrid_AddressDefOrder.ColRow;
+                _Settings.Address_Col = enGrid_AddressValue.Alfa;
+                _Settings.Address_Seperator = "";
+            }
+
             _Settings.Refresh_Calculations();
         }
 
@@ -147,14 +159,14 @@ namespace DuctingGrids.Frontend.Forms
             // Fired when mouse click on a grid
             
             IGridBlock_Base gridData = sender.GridState;
-            var caption = gridData.Name_Caption;
+            var caption = gridData.Name_Caption();
             if (radioClick.Checked)
             {
                 // Click event message
                 if (gridData._Parent != null)
                 {
-                    caption = gridData._Parent.Name_Caption + " x " + caption;
-                    if (gridData._Parent._Parent != null) caption = gridData._Parent._Parent.Name_Caption + " x " + caption;
+                    caption = gridData._Parent.Name_Caption() + " x " + caption;
+                    if (gridData._Parent._Parent != null) caption = gridData._Parent._Parent.Name_Caption() + " x " + caption;
                 }
                 MessageBox.Show(caption, "Grid Feedback");
             }

@@ -89,7 +89,7 @@ namespace DuctingGrids.Frontend.GridControl
 
             // Setup the row / grid properties
             gridcontrol.GridState = sender;
-            gridcontrol.Text = sender.Name_Caption;   // Set the caption of the control
+            gridcontrol.Text = sender.Name_Caption(_Settings.Address_Seperator,_Settings.Address_Order, _Settings.Address_Row, _Settings.Address_Col);   // Set the caption of the control
             if (gridcontroltype == enGrid_ControlType.Row)
             {
                 #region Row setup
@@ -126,7 +126,8 @@ namespace DuctingGrids.Frontend.GridControl
                 else if (blocktype == enGrid_BlockType.MicroBlock)
                 {
                     var display = _Settings.DisplayMode_MicroGrids;
-                    if (display == enGrid_BlockDisplayType.Address) gridcontrol.Text = sender.Name_Caption;   // Set the caption of the control
+                    if (display == enGrid_BlockDisplayType.Address)
+                        gridcontrol.Text = sender.Name_Caption(_Settings.Address_Seperator,_Settings.Address_Order, _Settings.Address_Row, _Settings.Address_Col);   // Set the caption of the control
                     if (display == enGrid_BlockDisplayType.Name) gridcontrol.Text = sender.Name_Control;   // Set the caption of the control
                     if (display == enGrid_BlockDisplayType.Value) gridcontrol.Text = "?";   //There is no value yet
 

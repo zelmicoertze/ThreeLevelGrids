@@ -243,11 +243,11 @@ namespace DuctingGrids.Frontend.GridControl
         {
             // Fired when mouse click on a grid
             var state = sender.GridState;
-            var caption = state.Name_Caption;
+            var caption = state.Name_Caption();
             if (state._Parent != null)
             {
-                caption = state._Parent.Name_Caption + " x " + caption;
-                if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption + " x " + caption;
+                caption = state._Parent.Name_Caption() + " x " + caption;
+                if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption() + " x " + caption;
             }
             MessageBox.Show(caption, "Grid Feedback");
         }

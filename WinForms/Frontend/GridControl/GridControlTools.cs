@@ -196,38 +196,35 @@ namespace DuctingGrids.Frontend.GridControl
             if (parent == null)
             {
                 // Cuboid
-                //if (GridSync_Size(child, gridControl, settings.Size_CuboidWidth, settings.Size_CuboidHeight)) onGridChangeEvent(gridControl, enGrid_ChangeType.Size); // Check size
-                if (resetColors && GridSync_Color(child, gridControl, settings.ColorDefault_CuboidGrid)) onGridChangeEvent(gridControl, enGrid_ChangeType.Color); // Check size
+                //if (GridSync_Size(child, gridControl, settings.Size_CuboidWidth, settings.Size_CuboidHeight)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Size); // Check size
+                if (resetColors && GridSync_Color(child, gridControl, settings.ColorDefault_CuboidGrid)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Color); // Check size
                 //if (GridSync_Visible(gridControl, Visible_CuboidGrids)) onGridChange?.Invoke(gridControl, enGridChangeType.Visible); // Check size
-                //if (GridSync_DisplayMode(grid, gridControl, DisplayMode_CuboidGrids)) onGridChange?.Invoke(gridControl, enGridChangeType.DisplayMode); // Check size
             }
             else if (parent.Child_BlockType == enGrid_BlockType.MacroBlock)
             {
                 // Macro
-                //if (GridSync_Size(child, gridControl, settings.Size_MacroWidth, settings.Size_MacroHeight)) onGridChangeEvent(gridControl, enGrid_ChangeType.Size); // Check size
-                if (resetColors && GridSync_Color(child, gridControl, settings.ColorDefault_MacroGrid)) onGridChangeEvent(gridControl, enGrid_ChangeType.Color); // Check size
-                if (GridSync_Visible(gridControl, settings.Visible_MacroGrids)) onGridChangeEvent(gridControl, enGrid_ChangeType.Visible); // Check size
-                //if (GridSync_DisplayMode(grid, gridControl, DisplayMode_MacroGrids)) onGridChange?.Invoke(gridControl, enGridChangeType.DisplayMode); // Check size
+                //if (GridSync_Size(child, gridControl, settings.Size_MacroWidth, settings.Size_MacroHeight)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Size); // Check size
+                if (resetColors && GridSync_Color(child, gridControl, settings.ColorDefault_MacroGrid)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Color); // Check size
+                if (GridSync_Visible(gridControl, settings.Visible_MacroGrids)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Visible); // Check size
             }
             else if (parent.Child_BlockType == enGrid_BlockType.SubBlock)
             {
                 // Sub
-                //if (GridSync_Size(child, gridControl, settings.Size_SubWidth, settings.Size_SubHeight)) onGridChangeEvent(gridControl, enGrid_ChangeType.Size); // Check size
-                if (resetColors && GridSync_Color(child, gridControl, settings.ColorDefault_SubGrid)) onGridChangeEvent(gridControl, enGrid_ChangeType.Color); // Check size
-                if (GridSync_Visible(gridControl, settings.Visible_SubGrids)) onGridChangeEvent(gridControl, enGrid_ChangeType.Visible); // Check size
-                //if (GridSync_DisplayMode(grid, gridControl, DisplayMode_SubGrids)) onGridChange?.Invoke(gridControl, enGridChangeType.DisplayMode); // Check size
+                //if (GridSync_Size(child, gridControl, settings.Size_SubWidth, settings.Size_SubHeight)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Size); // Check size
+                if (resetColors && GridSync_Color(child, gridControl, settings.ColorDefault_SubGrid)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Color); // Check size
+                if (GridSync_Visible(gridControl, settings.Visible_SubGrids)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Visible); // Check size
             }
             else if (parent.Child_BlockType == enGrid_BlockType.MicroBlock)
             {
                 // Micro
-                //if (GridSync_Size(child, gridControl, settings.Size_MicroWidth, settings.Size_MicroHeight)) onGridChangeEvent(gridControl, enGrid_ChangeType.Size); // Check size
-                if (resetColors && GridSync_Color(child, gridControl, settings.ColorDefault_MicroGrid)) onGridChangeEvent(gridControl, enGrid_ChangeType.Color); // Check size
-                if (GridSync_Visible(gridControl, settings.Visible_MicroGrids)) onGridChangeEvent(gridControl, enGrid_ChangeType.Visible); // Check size
-                if (GridSync_DisplayMode(grid, gridControl, settings.DisplayMode_MicroGrids)) onGridChangeEvent(gridControl, enGrid_ChangeType.DisplayMode); // Check size
+                //if (GridSync_Size(child, gridControl, settings.Size_MicroWidth, settings.Size_MicroHeight)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Size); // Check size
+                if (resetColors && GridSync_Color(child, gridControl, settings.ColorDefault_MicroGrid)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Color); // Check size
+                if (GridSync_Visible(gridControl, settings.Visible_MicroGrids)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.Visible); // Check size
             }
 
             // Color ID is always the same for all grids
-            if (settings.Color_ID.Count != 0 && GridSync_StateColor(grid, gridControl, settings)) onGridChangeEvent(gridControl, enGrid_ChangeType.StateColor); // Check size
+            if (GridSync_DisplayMode(parent, grid, gridControl, settings)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.DisplayMode); // Check size
+            if (settings.Color_ID.Count != 0 && GridSync_StateColor(grid, gridControl, settings)) onGridChangeEvent?.Invoke(gridControl, enGrid_ChangeType.StateColor); // Check size
         }
 
         [Test_IgnoreCoverage(enTestIgnore.FrontendCode)]
@@ -250,23 +247,31 @@ namespace DuctingGrids.Frontend.GridControl
         }
 
         [Test_IgnoreCoverage(enTestIgnore.FrontendCode)]
-        private static bool GridSync_DisplayMode(IGridBlock_Base grid, IGridControl gridControl, enGrid_BlockDisplayType displayMode)
+        private static bool GridSync_DisplayMode(IGridBlock_ChildState parent, IGridBlock_Base grid, IGridControl gridControl, GridControl_Settings settings)
         {
+            if (parent == null) return false;
+
             var result = false;
-            switch (displayMode)
+            if (parent.Child_BlockType == enGrid_BlockType.MicroBlock)
             {
-               case enGrid_BlockDisplayType.Address: gridControl.Text = grid.Name_Caption; break;
-               case enGrid_BlockDisplayType.Name: gridControl.Text = grid.Name_Control; break;
-               case enGrid_BlockDisplayType.Value:
+                switch (settings.DisplayMode_MicroGrids)
                 {
-                    var state = grid as IGridBlock_State;
-                    if (state == null) return false;
-                    if (Double.IsNaN(state.State_ValueDouble))
-                         gridControl.Text = "?";
-                    else gridControl.Text = state.State_ValueDouble.zObject().AsStr();
-                    break;
+                    case enGrid_BlockDisplayType.Address:
+                        gridControl.Text = grid.Name_Caption(settings.Address_Seperator, settings.Address_Order, settings.Address_Row, settings.Address_Col);
+                        break;
+                    case enGrid_BlockDisplayType.Name: gridControl.Text = grid.Name_Control;
+                        break;
+                    case enGrid_BlockDisplayType.Value:
+                    {
+                        var state = grid as IGridBlock_State;
+                        if (state == null) return false;
+                        if (Double.IsNaN(state.State_ValueDouble)) gridControl.Text = "?";
+                        else gridControl.Text = state.State_ValueDouble.zObject().AsStr();
+                        break;
+                    }
                 }
-            }
+            } else gridControl.Text = grid.Name_Caption(settings.Address_Seperator, settings.Address_Order, settings.Address_Row, settings.Address_Col);
+
             return result;
         }
 

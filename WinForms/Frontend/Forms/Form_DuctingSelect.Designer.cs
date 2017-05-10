@@ -79,6 +79,10 @@ namespace DuctingGrids.Frontend.Forms
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.radioRowCol = new System.Windows.Forms.RadioButton();
+            this.radioColRow = new System.Windows.Forms.RadioButton();
+            this.radioAlfaColRow = new System.Windows.Forms.RadioButton();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -89,6 +93,7 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox10.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
+            this.groupBox12.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonGenerate
@@ -255,7 +260,7 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox3.Controls.Add(this.checkSub);
             this.groupBox3.Controls.Add(this.checkMacro);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox3.Location = new System.Drawing.Point(1053, 16);
+            this.groupBox3.Location = new System.Drawing.Point(1236, 16);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(92, 66);
             this.groupBox3.TabIndex = 17;
@@ -306,6 +311,7 @@ namespace DuctingGrids.Frontend.Forms
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.groupBox12);
             this.groupBox4.Controls.Add(this.groupBox11);
             this.groupBox4.Controls.Add(this.groupBox7);
             this.groupBox4.Controls.Add(this.buttonRefresh);
@@ -321,7 +327,7 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1148, 85);
+            this.groupBox4.Size = new System.Drawing.Size(1331, 85);
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Toolbar";
@@ -334,7 +340,7 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox11.Controls.Add(this.label9);
             this.groupBox11.Controls.Add(this.label10);
             this.groupBox11.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox11.Location = new System.Drawing.Point(629, 16);
+            this.groupBox11.Location = new System.Drawing.Point(812, 16);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(143, 66);
             this.groupBox11.TabIndex = 25;
@@ -392,7 +398,7 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox7.Controls.Add(this.radioClick);
             this.groupBox7.Controls.Add(this.radioReadOnly);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox7.Location = new System.Drawing.Point(772, 16);
+            this.groupBox7.Location = new System.Drawing.Point(955, 16);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(92, 66);
             this.groupBox7.TabIndex = 18;
@@ -450,7 +456,7 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox10.Controls.Add(this.labelColorSub);
             this.groupBox10.Controls.Add(this.labelColorMacro);
             this.groupBox10.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox10.Location = new System.Drawing.Point(864, 16);
+            this.groupBox10.Location = new System.Drawing.Point(1047, 16);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(97, 66);
             this.groupBox10.TabIndex = 23;
@@ -509,7 +515,7 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox8.Controls.Add(this.radioValue);
             this.groupBox8.Controls.Add(this.radioAddress);
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox8.Location = new System.Drawing.Point(961, 16);
+            this.groupBox8.Location = new System.Drawing.Point(1144, 16);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(92, 66);
             this.groupBox8.TabIndex = 19;
@@ -607,13 +613,65 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(0, 85);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1148, 694);
+            this.groupBox6.Size = new System.Drawing.Size(1331, 694);
             this.groupBox6.TabIndex = 19;
             this.groupBox6.TabStop = false;
             // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.radioAlfaColRow);
+            this.groupBox12.Controls.Add(this.radioColRow);
+            this.groupBox12.Controls.Add(this.radioRowCol);
+            this.groupBox12.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox12.Location = new System.Drawing.Point(707, 16);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(105, 66);
+            this.groupBox12.TabIndex = 26;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Address Order";
+            // 
+            // radioRowCol
+            // 
+            this.radioRowCol.AutoSize = true;
+            this.radioRowCol.Checked = true;
+            this.radioRowCol.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radioRowCol.Location = new System.Drawing.Point(3, 16);
+            this.radioRowCol.Name = "radioRowCol";
+            this.radioRowCol.Size = new System.Drawing.Size(99, 17);
+            this.radioRowCol.TabIndex = 0;
+            this.radioRowCol.TabStop = true;
+            this.radioRowCol.Text = "Row.Col";
+            this.radioRowCol.UseVisualStyleBackColor = true;
+            this.radioRowCol.CheckedChanged += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // radioColRow
+            // 
+            this.radioColRow.AutoSize = true;
+            this.radioColRow.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radioColRow.Location = new System.Drawing.Point(3, 33);
+            this.radioColRow.Name = "radioColRow";
+            this.radioColRow.Size = new System.Drawing.Size(99, 17);
+            this.radioColRow.TabIndex = 1;
+            this.radioColRow.Text = "Col.Row";
+            this.radioColRow.UseVisualStyleBackColor = true;
+            this.radioColRow.CheckedChanged += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // radioAlfaColRow
+            // 
+            this.radioAlfaColRow.AutoSize = true;
+            this.radioAlfaColRow.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radioAlfaColRow.Location = new System.Drawing.Point(3, 50);
+            this.radioAlfaColRow.Name = "radioAlfaColRow";
+            this.radioAlfaColRow.Size = new System.Drawing.Size(99, 17);
+            this.radioAlfaColRow.TabIndex = 2;
+            this.radioAlfaColRow.TabStop = true;
+            this.radioAlfaColRow.Text = "AlfaColRow";
+            this.radioAlfaColRow.UseVisualStyleBackColor = true;
+            this.radioAlfaColRow.CheckedChanged += new System.EventHandler(this.buttonRefresh_Click);
+            // 
             // Form_DuctingSelect
             // 
-            this.ClientSize = new System.Drawing.Size(1148, 779);
+            this.ClientSize = new System.Drawing.Size(1331, 779);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox4);
             this.DoubleBuffered = true;
@@ -639,6 +697,8 @@ namespace DuctingGrids.Frontend.Forms
             this.groupBox8.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -693,5 +753,9 @@ namespace DuctingGrids.Frontend.Forms
         private TextBox textGridCols;
         private Label label9;
         private Label label10;
+        private GroupBox groupBox12;
+        private RadioButton radioColRow;
+        private RadioButton radioRowCol;
+        private RadioButton radioAlfaColRow;
     }
 }
