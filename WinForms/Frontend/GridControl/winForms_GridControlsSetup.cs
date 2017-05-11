@@ -57,7 +57,7 @@ namespace DuctingGrids.Frontend.GridControl
         private void onCreateGridControl(IGridBlock_Base sender, enGrid_ControlType gridcontroltype, string parentname, string childname, 
             enGrid_BlockType blocktype, ref IGridControl gridcontrol)
         {
-            if (gridcontrol != null) throw new ArgumentException(gridcontrol.ToString(), "Error!. Grid control must be null in order to be created.");
+            if (gridcontrol != null) throw new ArgumentException("gridcontrol", "Error!. Grid control must be null in order to be created.");
             #region Sample of a simple 1x1,1x1,1x1 grid
             // R1
             // R1cub1_1
