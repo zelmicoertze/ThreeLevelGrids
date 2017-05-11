@@ -20,7 +20,7 @@ namespace DuctingGrids.Frontend.Forms
         public DuctingControlForm()
         {
             InitializeComponent();
-            _settings = GridControlTools.GridControl_Settings();
+            _settings = GridControlTools.GridControl_Settings_Setup();
 
             var gridDataSet = new DataSet();
 

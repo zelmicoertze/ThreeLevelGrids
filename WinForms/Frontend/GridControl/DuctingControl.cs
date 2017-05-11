@@ -25,7 +25,7 @@ namespace DuctingGrids.Frontend.GridControl
     {
         private GridControl_Row _panelRow;
         private bool _refreshGrid;
-        private GridControl_Settings _Settings = GridControlTools.GridControl_Settings();
+        private GridControl_Settings _Settings = GridControlTools.GridControl_Settings_Setup();
         public winForms_GridControlsSetup _grids;
 
         public DuctingControl()
@@ -227,7 +227,7 @@ namespace DuctingGrids.Frontend.GridControl
             RefreshGrids();
         }
 
-        public void RefreshGrids()
+        private void RefreshGrids()
         {
             Frontend_Settings();
             if (_grids == null) GenerateGrids();
@@ -243,11 +243,11 @@ namespace DuctingGrids.Frontend.GridControl
         {
             // Fired when mouse click on a grid
             var state = sender.GridState;
-            var caption = state.Name_Caption;
+            var caption = state.Name_Caption();
             if (state._Parent != null)
             {
-                caption = state._Parent.Name_Caption + " x " + caption;
-                if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption + " x " + caption;
+                caption = state._Parent.Name_Caption() + " x " + caption;
+                if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption() + " x " + caption;
             }
             MessageBox.Show(caption, "Grid Feedback");
         }
