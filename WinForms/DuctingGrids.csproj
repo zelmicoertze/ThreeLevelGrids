@@ -46,12 +46,8 @@
     <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\..\..\Lamedal\trunk\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="LamedalCore, Version=1.1.4.2, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="LamedalCore, Version=1.1.6-alfa1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LamedalCore.1.1.6-alfa1\lib\net461\LamedalCore.dll</HintPath>
-    </Reference>
-    <Reference Include="LamedalExcel, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LamedalExcel.1.0.1\lib\net461\LamedalExcel.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -173,12 +169,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\..\LamedalCore\src\LamedalCore.csproj">
-      <Project>{cce0b77c-74ca-4e22-bebf-6a69cfa5442e}</Project>
-      <Name>LamedalCore</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <Content Include="CarabTekniva-Logo.ico" />
   </ItemGroup>
