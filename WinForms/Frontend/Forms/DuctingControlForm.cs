@@ -20,7 +20,7 @@ namespace DuctingGrids.Frontend.Forms
         public DuctingControlForm()
         {
             InitializeComponent();
-            _settings = GridControlTools.GridControl_Settings();
+            _settings = GridControlTools.GridControl_Settings_Setup();
 
             var gridDataSet = new DataSet();
 
@@ -74,7 +74,7 @@ namespace DuctingGrids.Frontend.Forms
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             ReFreshData();
-            _ductingControl.RefreshGrids();
+            _ductingControl.RefreshGrid = true;
         }
 
         private void ReFreshData()
@@ -105,7 +105,7 @@ namespace DuctingGrids.Frontend.Forms
             _ductingControl.subGridDefaultColor = labelColorSub.BackColor;
             _ductingControl.microGridDefaultColor = labelColorMicro.BackColor;
 
-            _ductingControl.RefreshGrids();
+            _ductingControl.RefreshGrid = true;
         }
 
         private void radioAddress_Click(object sender, EventArgs e)
@@ -128,7 +128,7 @@ namespace DuctingGrids.Frontend.Forms
             _ductingControl.displayName = bName;
             _ductingControl.displayAddress = bAddress;
             _ductingControl.displayValue = bValue;
-            _ductingControl.RefreshGrids();
+            _ductingControl.RefreshGrid = true;
         }
 
         private void checkDisplay(bool bMicro, bool bSub, bool bMacro)
@@ -136,7 +136,7 @@ namespace DuctingGrids.Frontend.Forms
             _ductingControl.visibleMicro = bMicro;
             _ductingControl.visibleSub = bSub;
             _ductingControl.visibleMacro = bMacro;
-            _ductingControl.RefreshGrids();
+            _ductingControl.RefreshGrid = true;
         }
 
         private void checkBox_Click(object sender, EventArgs e)

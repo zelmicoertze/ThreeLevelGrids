@@ -75,6 +75,10 @@
     <Position X="8" Y="4.75" Width="3.25" />
     <TypeIdentifier />
   </Class>
+  <Class Name="LamedalCore.domain.Enumerals.enGrid_BlockDisplayType">
+    <Position X="8" Y="1" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
   <Interface Name="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridBlock_Base">
     <Position X="4.25" Y="0.5" Width="2.75" />
     <AssociationLine Name="_Parent" Type="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridBlock_Base" FixedFromPoint="true" FixedToPoint="true">
@@ -96,9 +100,9 @@
     <AssociationLine Name="_Parent" Type="LamedalCore.zPublicClass.GridBlock.GridInterface.IGridControl" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="2.5" Y="1.267" />
-        <Point X="2.74" Y="1.267" />
-        <Point X="2.74" Y="0.26" />
-        <Point X="1.889" Y="0.26" />
+        <Point X="2.875" Y="1.267" />
+        <Point X="2.875" Y="0.125" />
+        <Point X="1.889" Y="0.125" />
         <Point X="1.889" Y="0.5" />
       </Path>
     </AssociationLine>
@@ -117,7 +121,7 @@
     <TypeIdentifier />
   </Enum>
   <Enum Name="LamedalCore.domain.Enumerals.enGrid_BlockDisplayType">
-    <Position X="7.75" Y="0.5" Width="2" />
+    <Position X="12" Y="7.25" Width="4" />
     <TypeIdentifier />
   </Enum>
   <Enum Name="LamedalCore.domain.Enumerals.enGrid_BlockEditMode">

@@ -28,7 +28,7 @@ namespace DuctingGrids.Frontend.Forms
         public Form2()
         {
             InitializeComponent();
-            _Settings = GridControlTools.GridControl_Settings();
+            _Settings = GridControlTools.GridControl_Settings_Setup();
             _loading = false;
 
             //var gridDataSet = new DataSet();
@@ -161,11 +161,11 @@ namespace DuctingGrids.Frontend.Forms
         {
             // Fired when mouse click on a grid
             var state = sender.GridState;
-            var caption = state.Name_Caption;
+            var caption = state.Name_Caption();
             if (state._Parent != null)
             {
-                caption = state._Parent.Name_Caption + " x "+ caption;
-                if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption + " x " + caption;
+                caption = state._Parent.Name_Caption() + " x "+ caption;
+                if (state._Parent._Parent != null) caption = state._Parent._Parent.Name_Caption() + " x " + caption;
             }
             MessageBox.Show(caption, "Grid Feedback");
         }
