@@ -9,8 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.Vml.Spreadsheet;
 using DuctingGrids.Frontend.Forms;
 using LamedalCore.domain.Enumerals;
 using LamedalCore.zPublicClass.GridBlock;
